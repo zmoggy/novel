@@ -167,9 +167,57 @@ class Game {
         this.npcs.forEach(npc => {
             npc.draw(this.renderer);
 
+            // Always draw name above NPC
+            this.renderer.drawText(
+                npc.npcName,
+                npc.x + npc.width / 2,
+                npc.y - 15,
+                'white',
+                14,
+                'center'
+            );
+
+            // Draw background for name
+            const nameWidth = this.renderer.ctx.measureText(npc.npcName).width;
+            this.renderer.drawRect(
+                npc.x + npc.width / 2 - nameWidth / 2 - 3,
+                npc.y - 27,
+                nameWidth + 6,
+                16,
+                'rgba(0, 0, 0, 0.6)'
+            );
+
+            // Redraw name on top of background
+            this.renderer.drawText(
+                npc.npcName,
+                npc.x + npc.width / 2,
+                npc.y - 15,
+                'white',
+                14,
+                'center'
+            );
+
             // Draw heart if helping
             if (npc.isHelping) {
-                this.renderer.drawText('❤️', npc.x + npc.width / 2, npc.y - 10, 'red', 16, 'center');
+                this.renderer.drawText('❤️', npc.x + npc.width / 2, npc.y - 35, 'red', 18, 'center');
+            }
+
+            // Draw interaction indicator if nearby
+            const nearbyNPC = this.getNearbyNPC();
+            if (nearbyNPC === npc) {
+                this.renderer.drawText('Press E', npc.x + npc.width / 2, npc.y - 50, '#FFD700', 12, 'center');
+                // Draw glow around NPC
+                this.renderer.ctx.save();
+                this.renderer.ctx.strokeStyle = '#FFD700';
+                this.renderer.ctx.lineWidth = 2;
+                this.renderer.ctx.setLineDash([5, 5]);
+                this.renderer.ctx.strokeRect(
+                    npc.x - this.renderer.camera.x - 5,
+                    npc.y - this.renderer.camera.y - 5,
+                    npc.width + 10,
+                    npc.height + 10
+                );
+                this.renderer.ctx.restore();
             }
         });
 

@@ -25,9 +25,19 @@ class Player extends Character {
             furniture: [],
             decorations: []
         };
+        this.currentAction = null;
+        this.actionTimer = 0;
     }
 
     update(deltaTime, input, world) {
+        // Update action timer
+        if (this.actionTimer > 0) {
+            this.actionTimer -= deltaTime;
+            if (this.actionTimer <= 0) {
+                this.currentAction = null;
+            }
+        }
+
         // Handle movement
         this.moveDirection = { x: 0, y: 0 };
 
@@ -98,6 +108,8 @@ class Player extends Character {
         const result = world.tillSoil(tileX, tileY);
         if (result) {
             this.energy -= 2;
+            this.currentAction = 'hoeing';
+            this.actionTimer = 500;
             return { success: true, message: 'Soil tilled!' };
         }
         return { success: false, message: 'Cannot till here!' };
@@ -114,6 +126,8 @@ class Player extends Character {
         if (result) {
             this.inventory.seeds[seedType]--;
             this.energy -= 2;
+            this.currentAction = 'planting';
+            this.actionTimer = 500;
             return { success: true, message: 'Seed planted!' };
         }
         return { success: false, message: 'Cannot plant here!' };
@@ -123,6 +137,8 @@ class Player extends Character {
         const result = world.waterCrop(tileX, tileY);
         if (result) {
             this.energy -= 1;
+            this.currentAction = 'watering';
+            this.actionTimer = 500;
             return { success: true, message: 'Crop watered!' };
         }
         return { success: false, message: 'Nothing to water!' };
@@ -133,6 +149,8 @@ class Player extends Character {
         if (crop) {
             this.energy -= 2;
             this.addCropToInventory(crop);
+            this.currentAction = 'harvesting';
+            this.actionTimer = 500;
 
             // Sell automatically for now
             const cropData = CONFIG.CROPS.find(c => c.id === crop);
@@ -161,6 +179,6 @@ class Player extends Character {
     }
 
     draw(renderer) {
-        renderer.drawCharacter(this.x, this.y, this.customization);
+        renderer.drawCharacter(this.x, this.y, this.customization, this.currentAction);
     }
 }

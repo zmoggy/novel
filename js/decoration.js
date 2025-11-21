@@ -8,8 +8,11 @@ class Decoration {
         this.ctx = this.canvas.getContext('2d');
         this.isOpen = false;
         this.placedFurniture = [];
+        this.draggedItem = null;
+        this.dragOffset = { x: 0, y: 0 };
 
         this.setupUI();
+        this.setupDragAndDrop();
     }
 
     setupUI() {
@@ -56,6 +59,55 @@ class Decoration {
             }
 
             grid.appendChild(card);
+        });
+    }
+
+    setupDragAndDrop() {
+        // Mouse down - start dragging
+        this.canvas.addEventListener('mousedown', (e) => {
+            const rect = this.canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            // Check if clicking on any furniture
+            for (let i = this.placedFurniture.length - 1; i >= 0; i--) {
+                const item = this.placedFurniture[i];
+                if (mouseX >= item.x && mouseX <= item.x + item.width &&
+                    mouseY >= item.y - item.height && mouseY <= item.y) {
+                    this.draggedItem = item;
+                    this.dragOffset.x = mouseX - item.x;
+                    this.dragOffset.y = mouseY - item.y;
+                    break;
+                }
+            }
+        });
+
+        // Mouse move - drag furniture
+        this.canvas.addEventListener('mousemove', (e) => {
+            if (this.draggedItem) {
+                const rect = this.canvas.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+
+                this.draggedItem.x = mouseX - this.dragOffset.x;
+                this.draggedItem.y = mouseY - this.dragOffset.y;
+
+                // Keep within bounds
+                this.draggedItem.x = Math.max(10, Math.min(this.canvas.width - this.draggedItem.width - 10, this.draggedItem.x));
+                this.draggedItem.y = Math.max(10, Math.min(this.canvas.height - 10, this.draggedItem.y));
+
+                this.updatePreview();
+            }
+        });
+
+        // Mouse up - stop dragging
+        this.canvas.addEventListener('mouseup', () => {
+            this.draggedItem = null;
+        });
+
+        // Mouse leave - stop dragging
+        this.canvas.addEventListener('mouseleave', () => {
+            this.draggedItem = null;
         });
     }
 
