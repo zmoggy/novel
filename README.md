@@ -2,41 +2,74 @@
 
 Welcome to Forest Farm! A charming browser-based farming game where you can grow crops, romance NPCs, customize your character, and enjoy life on your farm in the forest by the river.
 
+## ✨ Latest Updates
+- **FFT-Style Characters**: Beautiful Final Fantasy Tactics-inspired character sprites with detailed features
+- **Female Character**: Detailed female character with proper proportions, dress outfits, and facial features
+- **Working Farming**: Fully functional farming system with visual feedback
+- **Character Animations**: See your character perform actions (hoeing, planting, watering, harvesting)
+- **Draggable Furniture**: Click and drag to arrange furniture in your home
+- **Visible NPCs**: Romance options now have name tags and interaction prompts
+
 ## 🎮 Game Features
 
-### 🌱 Farming System
-- **Plow** soil to prepare for planting
-- **Plant** seeds (tomatoes, corn, strawberries)
-- **Water** crops to help them grow faster
-- **Harvest** mature crops for profit
+### 🌱 Farming System - NOW FULLY FUNCTIONAL!
+- **Plow** soil to prepare for planting (Press 1, then Space)
+- **Plant** seeds - tomatoes, corn, strawberries (Press 2, then Space)
+- **Water** crops to help them grow faster (Press 3, then Space)
+- **Harvest** mature crops for profit (Press 4, then Space)
+- **See your character work**: Animated farming actions with tool visuals
+- **Track growth**: Crops grow through 4 stages, faster when watered!
 
-### 👤 Character Creation
+### 👤 Character Creation - Enhanced!
+- **FFT-Style Sprites**: Detailed Final Fantasy Tactics-inspired character design
 - Customize your farmer with multiple options:
   - Choose from 8 skin tones
-  - Select from 6 hair styles
+  - Select from 6 hair styles (long, short, curly, pixie, bob, ponytail)
   - Pick from 8 hair colors
   - Choose from 7 eye colors
-  - Select your starting outfit
+  - **10 outfit options** - all unlocked from the start!
+- **Female Character**: Beautiful detailed female sprites with:
+  - Expressive eyes with highlights
+  - Eyelashes and blush
+  - Dress-style outfits
+  - Proper proportions and shading
 
-### 💕 Romance Options
+### 💕 Romance Options - Easy to Find!
 Meet and romance 3 unique NPCs:
 - **Alex** - Friendly and energetic
 - **Sam** - Artistic and thoughtful
 - **Riley** - Adventurous and playful
 
-NPCs have daily schedules, their own houses, and will help you on the farm when your relationship grows!
+**New Features:**
+- NPCs have **name tags** floating above them
+- **"Press E" prompt** appears when you're near an NPC
+- **Golden highlight** shows who you can talk to
+- NPCs have daily schedules and move around the map
+- They have their own houses (labeled)
+- Hearts appear when they're helping you!
 
 ### 🐕 Border Collie Companion
 You have a loyal border collie with heterochromia (one brown eye, one blue eye) who follows you around the farm and occasionally plays when you're standing still.
 
 ### 👗 Wardrobe System
-Change your outfits anytime! Unlock new outfits as you progress.
+Change your outfits anytime with **10 different outfits**:
+- Farmer Overalls
+- Casual Dress
+- Summer Sundress
+- Spring Floral
+- Elegant Gown
+- Cozy Sweater
+- Autumn Outfit
+- Party Dress
+- Sporty Wear
+- Traditional
 
-### 🏠 Home Decoration
-Decorate your house with furniture and decorations:
-- Beds, tables, chairs
-- Potted plants
-- Paintings and rugs
+### 🏠 Home Decoration - Drag and Drop!
+Decorate your house with furniture:
+- **Click and drag** furniture to move it around
+- Place beds, tables, chairs
+- Add potted plants, paintings, and rugs
+- Arrange your home exactly how you want it!
 
 ### 🌲 Beautiful World
 - Farm in a forest clearing
