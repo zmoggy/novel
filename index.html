@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forest Farm - A Farming Romance Game</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas" width="1280" height="720"></canvas>
+
+        <!-- Character Creation Screen -->
+        <div id="character-creation" class="screen active">
+            <h1>Create Your Farmer</h1>
+            <div class="creation-panel">
+                <div class="preview-section">
+                    <canvas id="characterPreview" width="400" height="400"></canvas>
+                </div>
+                <div class="options-section">
+                    <div class="option-group">
+                        <label>Name:</label>
+                        <input type="text" id="playerName" placeholder="Enter your name" maxlength="20">
+                    </div>
+
+                    <div class="option-group">
+                        <label>Skin Tone:</label>
+                        <div class="color-options" id="skinToneOptions"></div>
+                    </div>
+
+                    <div class="option-group">
+                        <label>Hair Style:</label>
+                        <div class="style-options" id="hairStyleOptions"></div>
+                    </div>
+
+                    <div class="option-group">
+                        <label>Hair Color:</label>
+                        <div class="color-options" id="hairColorOptions"></div>
+                    </div>
+
+                    <div class="option-group">
+                        <label>Eye Color:</label>
+                        <div class="color-options" id="eyeColorOptions"></div>
+                    </div>
+
+                    <div class="option-group">
+                        <label>Starting Outfit:</label>
+                        <div class="style-options" id="outfitOptions"></div>
+                    </div>
+
+                    <button id="startGame" class="btn-primary">Start Farming!</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game UI Overlay -->
+        <div id="game-ui" class="screen">
+            <!-- Top HUD -->
+            <div id="hud">
+                <div class="hud-section">
+                    <span id="playerNameDisplay"></span>
+                    <span id="dateDisplay"></span>
+                    <span id="timeDisplay"></span>
+                </div>
+                <div class="hud-section">
+                    <span>💰 <span id="moneyDisplay">500</span></span>
+                    <span>⚡ <span id="energyDisplay">100</span>/100</span>
+                </div>
+            </div>
+
+            <!-- Inventory Bar -->
+            <div id="inventory-bar">
+                <div class="inventory-slot" data-tool="hoe">🔨 Hoe</div>
+                <div class="inventory-slot" data-tool="seeds">🌱 Seeds</div>
+                <div class="inventory-slot" data-tool="wateringCan">💧 Water</div>
+                <div class="inventory-slot" data-tool="scythe">🪓 Scythe</div>
+                <div class="inventory-slot" data-tool="hand">✋ Hand</div>
+            </div>
+
+            <!-- Wardrobe Button -->
+            <button id="wardrobeBtn" class="ui-btn">👗 Wardrobe</button>
+
+            <!-- Home Decor Button -->
+            <button id="decorBtn" class="ui-btn">🏠 Decorate</button>
+        </div>
+
+        <!-- Wardrobe Screen -->
+        <div id="wardrobe-screen" class="screen modal">
+            <div class="modal-content">
+                <h2>Wardrobe</h2>
+                <div class="wardrobe-container">
+                    <div class="preview-section">
+                        <canvas id="wardrobePreview" width="300" height="300"></canvas>
+                    </div>
+                    <div class="wardrobe-options">
+                        <h3>Outfits</h3>
+                        <div id="outfitGrid" class="item-grid"></div>
+                        <h3>Accessories</h3>
+                        <div id="accessoryGrid" class="item-grid"></div>
+                    </div>
+                </div>
+                <button class="close-btn">Close</button>
+            </div>
+        </div>
+
+        <!-- Home Decoration Screen -->
+        <div id="decor-screen" class="screen modal">
+            <div class="modal-content">
+                <h2>Decorate Your Home</h2>
+                <div class="decor-container">
+                    <div class="room-preview">
+                        <canvas id="roomPreview" width="600" height="400"></canvas>
+                    </div>
+                    <div class="decor-options">
+                        <h3>Furniture</h3>
+                        <div id="furnitureGrid" class="item-grid"></div>
+                        <h3>Decorations</h3>
+                        <div id="decorationsGrid" class="item-grid"></div>
+                    </div>
+                </div>
+                <button class="close-btn">Close</button>
+            </div>
+        </div>
+
+        <!-- Dialogue Box -->
+        <div id="dialogue-box" class="dialogue-box hidden">
+            <div class="dialogue-portrait"></div>
+            <div class="dialogue-content">
+                <div class="dialogue-name"></div>
+                <div class="dialogue-text"></div>
+                <div class="dialogue-options"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/character.js"></script>
+    <script src="js/characterCreation.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/npc.js"></script>
+    <script src="js/dog.js"></script>
+    <script src="js/farm.js"></script>
+    <script src="js/world.js"></script>
+    <script src="js/wardrobe.js"></script>
+    <script src="js/decoration.js"></script>
+    <script src="js/dialogue.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/input.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
