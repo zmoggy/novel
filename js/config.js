@@ -170,7 +170,7 @@ const CONFIG = {
             id: 'mydei',
             name: 'Mydei',
             personality: 'intense and passionate',
-            portraitImage: 'images/characters/mydei.png',
+            portraitImage: 'images/characters/mydei.jpg',
             appearance: {
                 hairColor: '#FFD89A', // Golden blonde
                 hairStyle: 'messy',
