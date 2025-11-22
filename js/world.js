@@ -208,9 +208,14 @@ class World {
     }
 
     draw(renderer) {
-        // Draw world tiles
+        // Draw world tiles (skip farm area - we'll draw that separately)
         for (let y = 0; y < this.height; y++) {
             for (let x = 0; x < this.width; x++) {
+                // Skip tiles that are in the farm area
+                if (this.isInFarmArea(x, y)) {
+                    continue;
+                }
+
                 const tile = this.tiles[y][x];
                 const pixelX = x * CONFIG.TILE_SIZE;
                 const pixelY = y * CONFIG.TILE_SIZE;
@@ -219,13 +224,36 @@ class World {
             }
         }
 
-        // Draw farm area
+        // Draw farm tiles directly at their world positions
+        const farmOffsetX = this.farmArea.x;
+        const farmOffsetY = this.farmArea.y;
+
+        for (let y = 0; y < this.farm.height; y++) {
+            for (let x = 0; x < this.farm.width; x++) {
+                const tile = this.farm.getTile(x, y);
+                if (!tile) continue;
+
+                const worldPixelX = (farmOffsetX + x) * CONFIG.TILE_SIZE;
+                const worldPixelY = (farmOffsetY + y) * CONFIG.TILE_SIZE;
+
+                // Draw the farm tile (grass, tilled, etc.)
+                renderer.drawTile(worldPixelX, worldPixelY, tile.type);
+
+                // Draw crop if exists
+                const key = `${x},${y}`;
+                const crop = this.farm.crops.get(key);
+                if (crop) {
+                    renderer.drawCrop(worldPixelX, worldPixelY, crop);
+                }
+            }
+        }
+
+        // Draw farm area border
         const farmPixelX = this.farmArea.x * CONFIG.TILE_SIZE;
         const farmPixelY = this.farmArea.y * CONFIG.TILE_SIZE;
         const farmPixelW = this.farmArea.width * CONFIG.TILE_SIZE;
         const farmPixelH = this.farmArea.height * CONFIG.TILE_SIZE;
 
-        // Draw farm area border
         renderer.ctx.save();
         renderer.ctx.strokeStyle = '#FFD700';
         renderer.ctx.lineWidth = 3;
@@ -247,14 +275,6 @@ class World {
             16,
             'center'
         );
-
-        renderer.ctx.save();
-        renderer.ctx.translate(farmPixelX - renderer.camera.x, farmPixelY - renderer.camera.y);
-        this.farm.draw({
-            ...renderer,
-            camera: { x: 0, y: 0 }
-        });
-        renderer.ctx.restore();
 
         // Draw trees
         this.trees.forEach(tree => {
