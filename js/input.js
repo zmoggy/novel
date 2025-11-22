@@ -59,10 +59,26 @@ class InputHandler {
             const tileY = Math.floor(worldY / CONFIG.TILE_SIZE);
 
             console.log(`Clicked at screen (${mouseX}, ${mouseY}), world (${worldX}, ${worldY}), tile (${tileX}, ${tileY})`);
-            console.log(`Current tool: ${this.game.player.currentTool}`);
 
-            // Use the current tool on the clicked tile
-            this.handleFarmingClick(tileX, tileY);
+            // Priority 1: Check if we clicked on an NPC
+            const clickedNPC = this.game.getNPCAtPosition(worldX, worldY);
+            if (clickedNPC) {
+                console.log(`Clicked on NPC: ${clickedNPC.npcName}`);
+                clickedNPC.interact(this.game.player, this.game.dialogueSystem);
+                return;
+            }
+
+            // Priority 2: If we have a farming tool selected, use it
+            const farmingTools = ['hoe', 'seeds', 'wateringCan', 'hand'];
+            if (farmingTools.includes(this.game.player.currentTool)) {
+                console.log(`Using farming tool: ${this.game.player.currentTool}`);
+                this.handleFarmingClick(tileX, tileY);
+                return;
+            }
+
+            // Priority 3: Move player to clicked location
+            console.log(`Moving player to (${worldX}, ${worldY})`);
+            this.game.player.setDestination(worldX, worldY);
         });
     }
 

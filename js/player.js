@@ -27,6 +27,7 @@ class Player extends Character {
         };
         this.currentAction = null;
         this.actionTimer = 0;
+        this.destination = null; // For click-to-move
     }
 
     update(deltaTime, input, world) {
@@ -41,21 +42,54 @@ class Player extends Character {
         // Handle movement
         this.moveDirection = { x: 0, y: 0 };
 
-        if (input.keys['ArrowUp'] || input.keys['w']) {
-            this.moveDirection.y = -1;
-            this.direction = 'up';
-        }
-        if (input.keys['ArrowDown'] || input.keys['s']) {
-            this.moveDirection.y = 1;
-            this.direction = 'down';
-        }
-        if (input.keys['ArrowLeft'] || input.keys['a']) {
-            this.moveDirection.x = -1;
-            this.direction = 'left';
-        }
-        if (input.keys['ArrowRight'] || input.keys['d']) {
-            this.moveDirection.x = 1;
-            this.direction = 'right';
+        // Check for keyboard input (keyboard overrides click-to-move)
+        const hasKeyboardInput = input.keys['ArrowUp'] || input.keys['w'] ||
+                                 input.keys['ArrowDown'] || input.keys['s'] ||
+                                 input.keys['ArrowLeft'] || input.keys['a'] ||
+                                 input.keys['ArrowRight'] || input.keys['d'];
+
+        if (hasKeyboardInput) {
+            // Cancel click-to-move destination
+            this.destination = null;
+
+            if (input.keys['ArrowUp'] || input.keys['w']) {
+                this.moveDirection.y = -1;
+                this.direction = 'up';
+            }
+            if (input.keys['ArrowDown'] || input.keys['s']) {
+                this.moveDirection.y = 1;
+                this.direction = 'down';
+            }
+            if (input.keys['ArrowLeft'] || input.keys['a']) {
+                this.moveDirection.x = -1;
+                this.direction = 'left';
+            }
+            if (input.keys['ArrowRight'] || input.keys['d']) {
+                this.moveDirection.x = 1;
+                this.direction = 'right';
+            }
+        } else if (this.destination) {
+            // Move towards click destination
+            const dx = this.destination.x - (this.x + this.width / 2);
+            const dy = this.destination.y - (this.y + this.height / 2);
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            // If we're close enough, stop
+            if (distance < 5) {
+                this.destination = null;
+                this.moveDirection = { x: 0, y: 0 };
+            } else {
+                // Move towards destination
+                this.moveDirection.x = dx / distance;
+                this.moveDirection.y = dy / distance;
+
+                // Set direction based on movement
+                if (Math.abs(dx) > Math.abs(dy)) {
+                    this.direction = dx > 0 ? 'right' : 'left';
+                } else {
+                    this.direction = dy > 0 ? 'down' : 'up';
+                }
+            }
         }
 
         // Normalize diagonal movement
@@ -81,6 +115,10 @@ class Player extends Character {
 
     selectTool(tool) {
         this.currentTool = tool;
+    }
+
+    setDestination(x, y) {
+        this.destination = { x, y };
     }
 
     useTool(world) {

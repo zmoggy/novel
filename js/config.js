@@ -38,18 +38,98 @@ const CONFIG = {
         '#9370db', '#00CED1', '#2F4F4F'
     ],
 
-    // Outfits
+    // Outfits with distinct visual designs
     OUTFITS: [
-        { id: 'farmer', name: 'Farmer Overalls', color: '#8B4513', unlocked: true },
-        { id: 'casual', name: 'Casual Dress', color: '#4169e1', unlocked: true },
-        { id: 'summer', name: 'Summer Sundress', color: '#FFD700', unlocked: true },
-        { id: 'spring', name: 'Spring Floral', color: '#FF69B4', unlocked: true },
-        { id: 'fancy', name: 'Elegant Gown', color: '#9370db', unlocked: true },
-        { id: 'winter', name: 'Cozy Sweater', color: '#B22222', unlocked: true },
-        { id: 'autumn', name: 'Autumn Outfit', color: '#D2691E', unlocked: true },
-        { id: 'party', name: 'Party Dress', color: '#FF1493', unlocked: true },
-        { id: 'sporty', name: 'Sporty Wear', color: '#00CED1', unlocked: true },
-        { id: 'traditional', name: 'Traditional', color: '#DC143C', unlocked: true }
+        {
+            id: 'farmer',
+            name: 'Farmer Overalls',
+            type: 'overalls',
+            topColor: '#8B4513',
+            bottomColor: '#6B3410',
+            accentColor: '#FFD700',
+            unlocked: true
+        },
+        {
+            id: 'casual',
+            name: 'Casual Dress',
+            type: 'short_dress',
+            topColor: '#87CEEB',
+            bottomColor: '#4169e1',
+            accentColor: '#FFFFFF',
+            unlocked: true
+        },
+        {
+            id: 'summer',
+            name: 'Summer Sundress',
+            type: 'sundress',
+            topColor: '#FFFACD',
+            bottomColor: '#FFD700',
+            accentColor: '#FF69B4',
+            unlocked: true
+        },
+        {
+            id: 'spring',
+            name: 'Spring Floral',
+            type: 'long_dress',
+            topColor: '#FFB6C1',
+            bottomColor: '#FF69B4',
+            accentColor: '#98FB98',
+            unlocked: true
+        },
+        {
+            id: 'fancy',
+            name: 'Elegant Gown',
+            type: 'ball_gown',
+            topColor: '#E6E6FA',
+            bottomColor: '#9370DB',
+            accentColor: '#FFD700',
+            unlocked: true
+        },
+        {
+            id: 'winter',
+            name: 'Cozy Sweater',
+            type: 'sweater_pants',
+            topColor: '#DC143C',
+            bottomColor: '#8B4513',
+            accentColor: '#FFFFFF',
+            unlocked: true
+        },
+        {
+            id: 'autumn',
+            name: 'Autumn Outfit',
+            type: 'tunic',
+            topColor: '#D2691E',
+            bottomColor: '#8B4513',
+            accentColor: '#FF8C00',
+            unlocked: true
+        },
+        {
+            id: 'party',
+            name: 'Party Dress',
+            type: 'cocktail_dress',
+            topColor: '#FF1493',
+            bottomColor: '#C71585',
+            accentColor: '#FFD700',
+            unlocked: true
+        },
+        {
+            id: 'sporty',
+            name: 'Sporty Wear',
+            type: 'athletic',
+            topColor: '#00CED1',
+            bottomColor: '#1E90FF',
+            accentColor: '#FFFFFF',
+            unlocked: true
+        },
+        {
+            id: 'traditional',
+            name: 'Traditional Kimono',
+            type: 'kimono',
+            topColor: '#DC143C',
+            bottomColor: '#8B0000',
+            accentColor: '#FFD700',
+            unlocked: true
+        }
     ],
 
     // Romance NPCs

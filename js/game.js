@@ -253,6 +253,17 @@ class Game {
         return null;
     }
 
+    getNPCAtPosition(worldX, worldY) {
+        // Check if click is within any NPC's bounding box
+        for (const npc of this.npcs) {
+            if (worldX >= npc.x && worldX <= npc.x + npc.width &&
+                worldY >= npc.y && worldY <= npc.y + npc.height) {
+                return npc;
+            }
+        }
+        return null;
+    }
+
     run() {
         let lastTime = 0;
 

@@ -57,6 +57,234 @@ class Renderer {
         );
     }
 
+    // Draw different outfit types with distinct visual designs
+    drawOutfit(size, customization, skinTone) {
+        const outfit = customization.outfit || CONFIG.OUTFITS[0];
+        const type = outfit.type || 'short_dress';
+        const topColor = outfit.topColor || '#8B4513';
+        const bottomColor = outfit.bottomColor || '#6B3410';
+        const accentColor = outfit.accentColor || '#FFD700';
+
+        switch(type) {
+            case 'overalls':
+                // Overalls - straps and pants
+                // Pants bottom
+                this.ctx.fillStyle = bottomColor;
+                this.ctx.fillRect(size * 0.3, size * 0.5, size * 0.15, size * 0.45);
+                this.ctx.fillRect(size * 0.55, size * 0.5, size * 0.15, size * 0.45);
+                // Chest piece
+                this.ctx.fillRect(size * 0.32, size * 0.45, size * 0.36, size * 0.15);
+                // Straps
+                this.ctx.fillStyle = topColor;
+                this.ctx.fillRect(size * 0.37, size * 0.42, size * 0.08, size * 0.25);
+                this.ctx.fillRect(size * 0.55, size * 0.42, size * 0.08, size * 0.25);
+                // Buttons
+                this.ctx.fillStyle = accentColor;
+                this.ctx.beginPath();
+                this.ctx.arc(size * 0.41, size * 0.45, size * 0.02, 0, Math.PI * 2);
+                this.ctx.fill();
+                this.ctx.beginPath();
+                this.ctx.arc(size * 0.59, size * 0.45, size * 0.02, 0, Math.PI * 2);
+                this.ctx.fill();
+                break;
+
+            case 'short_dress':
+                // Short A-line dress
+                this.ctx.fillStyle = topColor;
+                this.ctx.beginPath();
+                this.ctx.moveTo(size * 0.3, size * 0.45);
+                this.ctx.lineTo(size * 0.7, size * 0.45);
+                this.ctx.lineTo(size * 0.75, size * 0.7);
+                this.ctx.lineTo(size * 0.25, size * 0.7);
+                this.ctx.closePath();
+                this.ctx.fill();
+                // Skirt portion
+                this.ctx.fillStyle = bottomColor;
+                this.ctx.beginPath();
+                this.ctx.moveTo(size * 0.25, size * 0.62);
+                this.ctx.lineTo(size * 0.75, size * 0.62);
+                this.ctx.lineTo(size * 0.8, size * 0.75);
+                this.ctx.lineTo(size * 0.2, size * 0.75);
+                this.ctx.closePath();
+                this.ctx.fill();
+                // Belt
+                this.ctx.fillStyle = accentColor;
+                this.ctx.fillRect(size * 0.3, size * 0.6, size * 0.4, size * 0.04);
+                break;
+
+            case 'sundress':
+                // Sundress - flowing design
+                this.ctx.fillStyle = topColor;
+                this.ctx.fillRect(size * 0.32, size * 0.45, size * 0.36, size * 0.12);
+                this.ctx.fillStyle = bottomColor;
+                this.ctx.beginPath();
+                this.ctx.moveTo(size * 0.28, size * 0.57);
+                this.ctx.lineTo(size * 0.72, size * 0.57);
+                this.ctx.lineTo(size * 0.78, size * 0.9);
+                this.ctx.lineTo(size * 0.22, size * 0.9);
+                this.ctx.closePath();
+                this.ctx.fill();
+                // Floral accents
+                this.ctx.fillStyle = accentColor;
+                for (let i = 0; i < 3; i++) {
+                    this.ctx.beginPath();
+                    this.ctx.arc(size * (0.35 + i * 0.15), size * 0.75, size * 0.025, 0, Math.PI * 2);
+                    this.ctx.fill();
+                }
+                break;
+
+            case 'long_dress':
+                // Long flowing dress
+                this.ctx.fillStyle = topColor;
+                this.ctx.fillRect(size * 0.32, size * 0.45, size * 0.36, size * 0.18);
+                this.ctx.fillStyle = bottomColor;
+                this.ctx.beginPath();
+                this.ctx.moveTo(size * 0.3, size * 0.63);
+                this.ctx.lineTo(size * 0.7, size * 0.63);
+                this.ctx.lineTo(size * 0.78, size * 0.95);
+                this.ctx.lineTo(size * 0.22, size * 0.95);
+                this.ctx.closePath();
+                this.ctx.fill();
+                // Accent trim
+                this.ctx.fillStyle = accentColor;
+                this.ctx.fillRect(size * 0.3, size * 0.61, size * 0.4, size * 0.03);
+                break;
+
+            case 'ball_gown':
+                // Ball gown - wide skirt
+                this.ctx.fillStyle = topColor;
+                this.ctx.beginPath();
+                this.ctx.moveTo(size * 0.35, size * 0.45);
+                this.ctx.lineTo(size * 0.65, size * 0.45);
+                this.ctx.lineTo(size * 0.68, size * 0.62);
+                this.ctx.lineTo(size * 0.32, size * 0.62);
+                this.ctx.closePath();
+                this.ctx.fill();
+                // Wide ball gown skirt
+                this.ctx.fillStyle = bottomColor;
+                this.ctx.beginPath();
+                this.ctx.arc(size * 0.5, size * 0.63, size * 0.32, 0, Math.PI);
+                this.ctx.fill();
+                // Gold trim
+                this.ctx.fillStyle = accentColor;
+                this.ctx.fillRect(size * 0.32, size * 0.6, size * 0.36, size * 0.03);
+                break;
+
+            case 'sweater_pants':
+                // Sweater and pants combo
+                // Sweater top
+                this.ctx.fillStyle = topColor;
+                this.ctx.fillRect(size * 0.28, size * 0.45, size * 0.44, size * 0.25);
+                // Pants
+                this.ctx.fillStyle = bottomColor;
+                this.ctx.fillRect(size * 0.32, size * 0.7, size * 0.15, size * 0.25);
+                this.ctx.fillRect(size * 0.53, size * 0.7, size * 0.15, size * 0.25);
+                // Scarf accent
+                this.ctx.fillStyle = accentColor;
+                this.ctx.fillRect(size * 0.35, size * 0.44, size * 0.3, size * 0.05);
+                break;
+
+            case 'tunic':
+                // Tunic style
+                this.ctx.fillStyle = topColor;
+                this.ctx.fillRect(size * 0.3, size * 0.45, size * 0.4, size * 0.3);
+                // Belt
+                this.ctx.fillStyle = accentColor;
+                this.ctx.fillRect(size * 0.32, size * 0.6, size * 0.36, size * 0.05);
+                // Leggings/pants
+                this.ctx.fillStyle = bottomColor;
+                this.ctx.fillRect(size * 0.34, size * 0.75, size * 0.13, size * 0.2);
+                this.ctx.fillRect(size * 0.53, size * 0.75, size * 0.13, size * 0.2);
+                break;
+
+            case 'cocktail_dress':
+                // Cocktail dress - fitted top, flared skirt
+                this.ctx.fillStyle = topColor;
+                this.ctx.beginPath();
+                this.ctx.moveTo(size * 0.32, size * 0.45);
+                this.ctx.lineTo(size * 0.68, size * 0.45);
+                this.ctx.lineTo(size * 0.65, size * 0.65);
+                this.ctx.lineTo(size * 0.35, size * 0.65);
+                this.ctx.closePath();
+                this.ctx.fill();
+                // Flared skirt
+                this.ctx.fillStyle = bottomColor;
+                this.ctx.beginPath();
+                this.ctx.moveTo(size * 0.35, size * 0.65);
+                this.ctx.lineTo(size * 0.65, size * 0.65);
+                this.ctx.lineTo(size * 0.75, size * 0.82);
+                this.ctx.lineTo(size * 0.25, size * 0.82);
+                this.ctx.closePath();
+                this.ctx.fill();
+                // Sparkly accent
+                this.ctx.fillStyle = accentColor;
+                this.ctx.fillRect(size * 0.35, size * 0.63, size * 0.3, size * 0.02);
+                break;
+
+            case 'athletic':
+                // Athletic wear - sports top and shorts
+                this.ctx.fillStyle = topColor;
+                this.ctx.fillRect(size * 0.3, size * 0.45, size * 0.4, size * 0.22);
+                // Shorts
+                this.ctx.fillStyle = bottomColor;
+                this.ctx.fillRect(size * 0.32, size * 0.67, size * 0.15, size * 0.18);
+                this.ctx.fillRect(size * 0.53, size * 0.67, size * 0.15, size * 0.18);
+                // Stripe accent
+                this.ctx.fillStyle = accentColor;
+                this.ctx.fillRect(size * 0.32, size * 0.55, size * 0.36, size * 0.03);
+                break;
+
+            case 'kimono':
+                // Traditional kimono
+                this.ctx.fillStyle = topColor;
+                this.ctx.beginPath();
+                this.ctx.moveTo(size * 0.25, size * 0.45);
+                this.ctx.lineTo(size * 0.75, size * 0.45);
+                this.ctx.lineTo(size * 0.72, size * 0.92);
+                this.ctx.lineTo(size * 0.28, size * 0.92);
+                this.ctx.closePath();
+                this.ctx.fill();
+                // Obi (belt)
+                this.ctx.fillStyle = accentColor;
+                this.ctx.fillRect(size * 0.3, size * 0.58, size * 0.4, size * 0.12);
+                // Inner layer
+                this.ctx.fillStyle = bottomColor;
+                this.ctx.fillRect(size * 0.42, size * 0.48, size * 0.16, size * 0.15);
+                break;
+
+            default:
+                // Default simple dress
+                this.ctx.fillStyle = topColor;
+                this.ctx.beginPath();
+                this.ctx.moveTo(size * 0.3, size * 0.45);
+                this.ctx.lineTo(size * 0.7, size * 0.45);
+                this.ctx.lineTo(size * 0.8, size * 0.95);
+                this.ctx.lineTo(size * 0.2, size * 0.95);
+                this.ctx.closePath();
+                this.ctx.fill();
+        }
+
+        // Arms (drawn over outfit)
+        this.ctx.fillStyle = topColor;
+        // Left arm
+        this.ctx.fillRect(size * 0.15, size * 0.45, size * 0.12, size * 0.35);
+        // Right arm
+        this.ctx.fillRect(size * 0.73, size * 0.45, size * 0.12, size * 0.35);
+
+        // Hands
+        this.ctx.fillStyle = skinTone;
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.21, size * 0.82, size * 0.08, 0, Math.PI * 2);
+        this.ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.79, size * 0.82, size * 0.08, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Neck
+        this.ctx.fillStyle = skinTone;
+        this.ctx.fillRect(size * 0.42, size * 0.38, size * 0.16, size * 0.1);
+    }
+
     // Draw a detailed FFT-style character (used for player and NPCs)
     drawCharacter(x, y, customization, action = null) {
         const screenX = x - this.camera.x;
@@ -99,48 +327,9 @@ class Renderer {
             this.ctx.fill();
         }
 
-        // BODY - Female figure
-        const outfitColor = customization.outfit?.color || '#8B4513';
-
-        // Dress/outfit body
-        this.ctx.fillStyle = outfitColor;
-        this.ctx.beginPath();
-        this.ctx.moveTo(size * 0.3, size * 0.45);
-        this.ctx.lineTo(size * 0.7, size * 0.45);
-        this.ctx.lineTo(size * 0.8, size * 0.95);
-        this.ctx.lineTo(size * 0.2, size * 0.95);
-        this.ctx.closePath();
-        this.ctx.fill();
-
-        // Dress shading
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
-        this.ctx.beginPath();
-        this.ctx.moveTo(size * 0.5, size * 0.45);
-        this.ctx.lineTo(size * 0.55, size * 0.95);
-        this.ctx.lineTo(size * 0.45, size * 0.95);
-        this.ctx.closePath();
-        this.ctx.fill();
-
-        // Sleeves/Arms
-        this.ctx.fillStyle = outfitColor;
-        // Left arm
-        this.ctx.fillRect(size * 0.15, size * 0.45, size * 0.12, size * 0.35);
-        // Right arm
-        this.ctx.fillRect(size * 0.73, size * 0.45, size * 0.12, size * 0.35);
-
-        // Hands
+        // BODY - Draw outfit based on type
         const skinTone = customization.skinTone || '#fce5cd';
-        this.ctx.fillStyle = skinTone;
-        this.ctx.beginPath();
-        this.ctx.arc(size * 0.21, size * 0.82, size * 0.08, 0, Math.PI * 2);
-        this.ctx.fill();
-        this.ctx.beginPath();
-        this.ctx.arc(size * 0.79, size * 0.82, size * 0.08, 0, Math.PI * 2);
-        this.ctx.fill();
-
-        // Neck
-        this.ctx.fillStyle = skinTone;
-        this.ctx.fillRect(size * 0.42, size * 0.38, size * 0.16, size * 0.1);
+        this.drawOutfit(size, customization, skinTone);
 
         // HEAD
         this.ctx.fillStyle = skinTone;
