@@ -338,6 +338,8 @@ body {
     display: flex;
     gap: 3px;
     align-items: center;
+    flex-wrap: wrap;
+    max-width: 130px;
 }
 
 .relationship-hearts .heart {
@@ -459,7 +461,6 @@ body {
 /* Dialogue Box */
 .dialogue-box {
     position: absolute;
-    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
@@ -474,13 +475,34 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+}
+
+/* Position variants */
+.dialogue-box.dialogue-bottom {
+    bottom: 20px;
     animation: slideUp 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.dialogue-box.dialogue-top {
+    top: 20px;
+    animation: slideDown 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 @keyframes slideUp {
     from {
         opacity: 0;
         transform: translateX(-50%) translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50px);
     }
     to {
         opacity: 1;
@@ -634,6 +656,127 @@ body {
 .dialogue-option:active {
     transform: translateY(-1px);
     box-shadow: 0 3px 8px rgba(106, 90, 205, 0.2);
+}
+
+/* Character-specific dialogue box colors */
+/* Dan Heng - Dark Blue */
+.dialogue-box.npc-danheng {
+    background: linear-gradient(135deg, rgba(20, 40, 80, 0.95), rgba(30, 60, 100, 0.95));
+    border-color: #4a7da8;
+}
+
+.dialogue-box.npc-danheng .dialogue-portraits {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d5580 100%);
+    border-bottom-color: #4a7da8;
+}
+
+.dialogue-box.npc-danheng .dialogue-portrait-right {
+    background: linear-gradient(135deg, #2a4d7a, #3d6b9e);
+    border-color: #5a8fc4;
+    box-shadow: 0 8px 20px rgba(74, 125, 168, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+}
+
+.dialogue-box.npc-danheng .dialogue-name {
+    background: linear-gradient(135deg, #6ba3d8, #89c5f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.dialogue-box.npc-danheng .dialogue-text {
+    color: #e6f0f7;
+}
+
+.dialogue-box.npc-danheng .dialogue-option {
+    background: linear-gradient(135deg, #2a4d7a, #345d8a);
+    border-color: #5a8fc4;
+    color: #c8dff0;
+}
+
+.dialogue-box.npc-danheng .dialogue-option:hover {
+    background: linear-gradient(135deg, #3d6b9e, #4a7da8);
+    border-color: #89c5f0;
+    box-shadow: 0 6px 15px rgba(74, 125, 168, 0.35);
+}
+
+/* Mydei - Dark Red */
+.dialogue-box.npc-mydei {
+    background: linear-gradient(135deg, rgba(60, 20, 25, 0.95), rgba(90, 30, 35, 0.95));
+    border-color: #a84a4a;
+}
+
+.dialogue-box.npc-mydei .dialogue-portraits {
+    background: linear-gradient(135deg, #5f1e1e 0%, #803030 100%);
+    border-bottom-color: #a84a4a;
+}
+
+.dialogue-box.npc-mydei .dialogue-portrait-right {
+    background: linear-gradient(135deg, #7a2a2a, #9e3d3d);
+    border-color: #c45a5a;
+    box-shadow: 0 8px 20px rgba(168, 74, 74, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+}
+
+.dialogue-box.npc-mydei .dialogue-name {
+    background: linear-gradient(135deg, #d86b6b, #f08989);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.dialogue-box.npc-mydei .dialogue-text {
+    color: #f7e6e6;
+}
+
+.dialogue-box.npc-mydei .dialogue-option {
+    background: linear-gradient(135deg, #7a2a2a, #8a3434);
+    border-color: #c45a5a;
+    color: #f0c8c8;
+}
+
+.dialogue-box.npc-mydei .dialogue-option:hover {
+    background: linear-gradient(135deg, #9e3d3d, #a84a4a);
+    border-color: #f08989;
+    box-shadow: 0 6px 15px rgba(168, 74, 74, 0.35);
+}
+
+/* Phainon - Medium Blue */
+.dialogue-box.npc-phainon {
+    background: linear-gradient(135deg, rgba(40, 60, 100, 0.95), rgba(60, 90, 140, 0.95));
+    border-color: #7a9fc8;
+}
+
+.dialogue-box.npc-phainon .dialogue-portraits {
+    background: linear-gradient(135deg, #3a5a8f 0%, #4d75b0 100%);
+    border-bottom-color: #7a9fc8;
+}
+
+.dialogue-box.npc-phainon .dialogue-portrait-right {
+    background: linear-gradient(135deg, #4d75b0, #6b95d0);
+    border-color: #8fb5e0;
+    box-shadow: 0 8px 20px rgba(122, 159, 200, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+}
+
+.dialogue-box.npc-phainon .dialogue-name {
+    background: linear-gradient(135deg, #89b5e0, #a5d0f5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.dialogue-box.npc-phainon .dialogue-text {
+    color: #e8f2fa;
+}
+
+.dialogue-box.npc-phainon .dialogue-option {
+    background: linear-gradient(135deg, #4d75b0, #5a85c0);
+    border-color: #8fb5e0;
+    color: #d5e8f5;
+}
+
+.dialogue-box.npc-phainon .dialogue-option:hover {
+    background: linear-gradient(135deg, #6b95d0, #7a9fc8);
+    border-color: #a5d0f5;
+    box-shadow: 0 6px 15px rgba(122, 159, 200, 0.35);
 }
 
 /* Responsive */

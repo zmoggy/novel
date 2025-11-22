@@ -16,10 +16,38 @@ class DialogueSystem {
         this.portraitRenderer = renderer;
     }
 
-    show(npcName, text, npc, options = []) {
+    show(npcName, text, npc, options = [], player = null) {
         this.isOpen = true;
         this.box.classList.remove('hidden');
         this.currentNPC = npc;
+
+        // Remove all character-specific classes
+        this.box.classList.remove('npc-phainon', 'npc-mydei', 'npc-danheng');
+
+        // Add character-specific class based on NPC ID
+        if (npc && npc.id) {
+            this.box.classList.add(`npc-${npc.id}`);
+        }
+
+        // Position dialogue based on player position
+        // If player is in bottom half of screen, show dialogue at top
+        // If player is in top half, show dialogue at bottom
+        this.box.classList.remove('dialogue-top', 'dialogue-bottom');
+        if (player) {
+            const canvas = document.getElementById('game-canvas');
+            const canvasHeight = canvas ? canvas.height : 768;
+            const playerScreenY = player.y; // Player's world position
+
+            // If player is in bottom half, show dialogue at top
+            if (playerScreenY > canvasHeight / 2) {
+                this.box.classList.add('dialogue-top');
+            } else {
+                this.box.classList.add('dialogue-bottom');
+            }
+        } else {
+            // Default to bottom if no player info
+            this.box.classList.add('dialogue-bottom');
+        }
 
         this.nameDiv.textContent = npcName;
         this.textDiv.textContent = text;

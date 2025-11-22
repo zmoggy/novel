@@ -159,7 +159,7 @@ class NPC extends Character {
             ];
         }
 
-        dialogueSystem.show(this.npcName, message, this, options);
+        dialogueSystem.show(this.npcName, message, this, options, player);
     }
 
     offerHelp(player) {
