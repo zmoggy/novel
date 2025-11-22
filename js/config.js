@@ -139,7 +139,7 @@ const CONFIG = {
             name: 'Phainon',
             personality: 'heroic and warmhearted',
             appearance: {
-                hairColor: '#FFD89A', // Golden blonde
+                hairColor: '#E6F2FF', // Silver/white
                 hairStyle: 'spiky',
                 eyeColor: '#8B4513', // Brown
                 outfitColors: {
@@ -202,9 +202,10 @@ const CONFIG = {
             name: 'Dan Heng',
             personality: 'calm and composed',
             appearance: {
-                hairColor: '#E6F2FF', // Silver/white
+                hairColor: '#FFD89A', // Golden blonde
                 hairStyle: 'long',
                 eyeColor: '#00CED1', // Cyan
+                hasHorns: true,
                 outfitColors: {
                     primary: '#B0C4DE', // Light blue/steel
                     secondary: '#4682B4', // Steel blue
