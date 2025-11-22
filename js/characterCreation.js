@@ -19,6 +19,8 @@ class CharacterCreation {
     }
 
     setupUI() {
+        console.log('Setting up character creation UI...');
+
         // Name input
         const nameInput = document.getElementById('playerName');
         nameInput.addEventListener('input', (e) => {
@@ -26,6 +28,7 @@ class CharacterCreation {
         });
 
         // Skin tone options
+        console.log('Creating skin tone options:', CONFIG.SKIN_TONES);
         this.createColorOptions('skinToneOptions', CONFIG.SKIN_TONES, (color) => {
             this.customization.skinTone = color;
             this.updatePreview();
@@ -67,6 +70,13 @@ class CharacterCreation {
 
     createColorOptions(containerId, colors, onChange) {
         const container = document.getElementById(containerId);
+        console.log(`Creating color options for ${containerId}:`, container, colors);
+
+        if (!container) {
+            console.error(`Container ${containerId} not found!`);
+            return;
+        }
+
         colors.forEach((color, index) => {
             const option = document.createElement('div');
             option.className = 'color-option';
@@ -81,10 +91,19 @@ class CharacterCreation {
 
             container.appendChild(option);
         });
+
+        console.log(`Created ${colors.length} color options in ${containerId}`);
     }
 
     createStyleOptions(containerId, styles, onChange) {
         const container = document.getElementById(containerId);
+        console.log(`Creating style options for ${containerId}:`, container, styles);
+
+        if (!container) {
+            console.error(`Container ${containerId} not found!`);
+            return;
+        }
+
         styles.forEach((style, index) => {
             const option = document.createElement('div');
             option.className = 'style-option';
@@ -99,11 +118,21 @@ class CharacterCreation {
 
             container.appendChild(option);
         });
+
+        console.log(`Created ${styles.length} style options in ${containerId}`);
     }
 
     createOutfitOptions() {
         const container = document.getElementById('outfitOptions');
-        CONFIG.OUTFITS.filter(o => o.unlocked).forEach((outfit, index) => {
+        const outfits = CONFIG.OUTFITS.filter(o => o.unlocked);
+        console.log('Creating outfit options:', container, outfits);
+
+        if (!container) {
+            console.error('Container outfitOptions not found!');
+            return;
+        }
+
+        outfits.forEach((outfit, index) => {
             const option = document.createElement('div');
             option.className = 'style-option';
             option.textContent = outfit.name;
@@ -118,6 +147,8 @@ class CharacterCreation {
 
             container.appendChild(option);
         });
+
+        console.log(`Created ${outfits.length} outfit options`);
     }
 
     updatePreview() {
