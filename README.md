@@ -37,11 +37,11 @@ Welcome to Forest Farm! A charming browser-based farming game where you can grow
   - Dress-style outfits
   - Proper proportions and shading
 
-### 💕 Romance Options - Easy to Find!
-Meet and romance 3 unique NPCs:
-- **Alex** - Friendly and energetic
-- **Sam** - Artistic and thoughtful
-- **Riley** - Adventurous and playful
+### 💕 Romance Options - Honkai Star Rail Characters!
+Meet and romance 3 unique NPCs from Honkai Star Rail:
+- **Phainon** - Heroic and warmhearted knight with white hair and blue eyes
+- **Mydei** - Intense and passionate warrior with blonde hair and amber eyes
+- **Dan Heng** - Calm and composed guardian with dark hair, cyan eyes, and dragon horns
 
 **New Features:**
 - NPCs have **name tags** floating above them
