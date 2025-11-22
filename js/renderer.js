@@ -309,6 +309,10 @@ class Renderer {
         this.ctx.save();
         this.ctx.translate(screenX, screenY + offsetY);
 
+        // Enable anti-aliasing for smoother rendering
+        this.ctx.imageSmoothingEnabled = true;
+        this.ctx.imageSmoothingQuality = 'high';
+
         // Shadow
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
         this.ctx.beginPath();
@@ -336,52 +340,87 @@ class Renderer {
         const skinTone = customization.skinTone || '#fce5cd';
         this.drawOutfit(size, customization, skinTone);
 
-        // HEAD
-        this.ctx.fillStyle = skinTone;
+        // HEAD with gradient shading
+        const headGradient = this.ctx.createRadialGradient(
+            size * 0.48, size * 0.22, size * 0.05,
+            size * 0.5, size * 0.25, size * 0.22
+        );
+        headGradient.addColorStop(0, this.lightenColor(skinTone, 20));
+        headGradient.addColorStop(1, skinTone);
+        this.ctx.fillStyle = headGradient;
         this.ctx.beginPath();
         this.ctx.arc(size / 2, size * 0.25, size * 0.22, 0, Math.PI * 2);
         this.ctx.fill();
 
         // Head shading for dimension
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.06)';
         this.ctx.beginPath();
-        this.ctx.arc(size * 0.42, size * 0.28, size * 0.15, 0, Math.PI * 2);
+        this.ctx.arc(size * 0.58, size * 0.28, size * 0.12, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Face highlight
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+        this.ctx.beginPath();
+        this.ctx.ellipse(size * 0.46, size * 0.23, size * 0.08, size * 0.06, -0.3, 0, Math.PI * 2);
         this.ctx.fill();
 
         // FACIAL FEATURES
-        // Eyes
+        // Eyes - larger and more detailed
         const eyeColor = customization.eyeColor || '#4169e1';
 
-        // Eye whites
+        // Eye whites with slight shadow
         this.ctx.fillStyle = 'white';
-        this.ctx.fillRect(size * 0.38, size * 0.23, size * 0.08, size * 0.06);
-        this.ctx.fillRect(size * 0.54, size * 0.23, size * 0.08, size * 0.06);
+        this.ctx.fillRect(size * 0.37, size * 0.22, size * 0.1, size * 0.07);
+        this.ctx.fillRect(size * 0.53, size * 0.22, size * 0.1, size * 0.07);
 
-        // Irises
-        this.ctx.fillStyle = eyeColor;
+        // Irises with gradient
+        const leftEyeGradient = this.ctx.createRadialGradient(
+            size * 0.42, size * 0.25, size * 0.01,
+            size * 0.42, size * 0.255, size * 0.035
+        );
+        leftEyeGradient.addColorStop(0, this.lightenColor(eyeColor, 30));
+        leftEyeGradient.addColorStop(1, eyeColor);
+        this.ctx.fillStyle = leftEyeGradient;
         this.ctx.beginPath();
-        this.ctx.arc(size * 0.42, size * 0.26, size * 0.03, 0, Math.PI * 2);
+        this.ctx.arc(size * 0.42, size * 0.255, size * 0.035, 0, Math.PI * 2);
         this.ctx.fill();
+
+        const rightEyeGradient = this.ctx.createRadialGradient(
+            size * 0.58, size * 0.25, size * 0.01,
+            size * 0.58, size * 0.255, size * 0.035
+        );
+        rightEyeGradient.addColorStop(0, this.lightenColor(eyeColor, 30));
+        rightEyeGradient.addColorStop(1, eyeColor);
+        this.ctx.fillStyle = rightEyeGradient;
         this.ctx.beginPath();
-        this.ctx.arc(size * 0.58, size * 0.26, size * 0.03, 0, Math.PI * 2);
+        this.ctx.arc(size * 0.58, size * 0.255, size * 0.035, 0, Math.PI * 2);
         this.ctx.fill();
 
         // Pupils
         this.ctx.fillStyle = '#000';
         this.ctx.beginPath();
-        this.ctx.arc(size * 0.42, size * 0.26, size * 0.015, 0, Math.PI * 2);
+        this.ctx.arc(size * 0.42, size * 0.255, size * 0.018, 0, Math.PI * 2);
         this.ctx.fill();
         this.ctx.beginPath();
-        this.ctx.arc(size * 0.58, size * 0.26, size * 0.015, 0, Math.PI * 2);
+        this.ctx.arc(size * 0.58, size * 0.255, size * 0.018, 0, Math.PI * 2);
         this.ctx.fill();
 
-        // Eye highlights
-        this.ctx.fillStyle = 'white';
+        // Eye highlights - larger and more prominent
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
         this.ctx.beginPath();
-        this.ctx.arc(size * 0.425, size * 0.255, size * 0.008, 0, Math.PI * 2);
+        this.ctx.arc(size * 0.425, size * 0.248, size * 0.012, 0, Math.PI * 2);
         this.ctx.fill();
         this.ctx.beginPath();
-        this.ctx.arc(size * 0.585, size * 0.255, size * 0.008, 0, Math.PI * 2);
+        this.ctx.arc(size * 0.585, size * 0.248, size * 0.012, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Secondary eye highlights
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.415, size * 0.26, size * 0.006, 0, Math.PI * 2);
+        this.ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.575, size * 0.26, size * 0.006, 0, Math.PI * 2);
         this.ctx.fill();
 
         // Eyelashes
@@ -522,6 +561,10 @@ class Renderer {
         this.ctx.save();
         this.ctx.translate(screenX, screenY);
 
+        // Enable anti-aliasing for smoother rendering
+        this.ctx.imageSmoothingEnabled = true;
+        this.ctx.imageSmoothingQuality = 'high';
+
         // Shadow
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
         this.ctx.beginPath();
@@ -584,43 +627,84 @@ class Renderer {
         this.ctx.fillStyle = skinTone;
         this.ctx.fillRect(size * 0.42, size * 0.38, size * 0.16, size * 0.1);
 
-        // HEAD
-        this.ctx.fillStyle = skinTone;
+        // HEAD with gradient shading
+        const maleHeadGradient = this.ctx.createRadialGradient(
+            size * 0.48, size * 0.22, size * 0.05,
+            size * 0.5, size * 0.25, size * 0.2
+        );
+        maleHeadGradient.addColorStop(0, this.lightenColor(skinTone, 15));
+        maleHeadGradient.addColorStop(1, skinTone);
+        this.ctx.fillStyle = maleHeadGradient;
         this.ctx.beginPath();
         this.ctx.arc(size / 2, size * 0.25, size * 0.2, 0, Math.PI * 2);
         this.ctx.fill();
 
-        // FACIAL FEATURES
-        // Eyes - more angular for males
-        this.ctx.fillStyle = 'white';
-        this.ctx.fillRect(size * 0.38, size * 0.24, size * 0.08, size * 0.05);
-        this.ctx.fillRect(size * 0.54, size * 0.24, size * 0.08, size * 0.05);
-
-        // Irises
-        this.ctx.fillStyle = eyeColor;
+        // Jaw/chin definition
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         this.ctx.beginPath();
-        this.ctx.arc(size * 0.42, size * 0.265, size * 0.03, 0, Math.PI * 2);
+        this.ctx.arc(size * 0.5, size * 0.32, size * 0.12, 0, Math.PI);
         this.ctx.fill();
+
+        // Face highlight
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
         this.ctx.beginPath();
-        this.ctx.arc(size * 0.58, size * 0.265, size * 0.03, 0, Math.PI * 2);
+        this.ctx.ellipse(size * 0.46, size * 0.22, size * 0.07, size * 0.05, -0.3, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // FACIAL FEATURES
+        // Eyes - more angular and detailed for males
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillRect(size * 0.37, size * 0.23, size * 0.09, size * 0.06);
+        this.ctx.fillRect(size * 0.54, size * 0.23, size * 0.09, size * 0.06);
+
+        // Irises with gradient
+        const maleLeftEyeGradient = this.ctx.createRadialGradient(
+            size * 0.415, size * 0.255, size * 0.01,
+            size * 0.415, size * 0.26, size * 0.032
+        );
+        maleLeftEyeGradient.addColorStop(0, this.lightenColor(eyeColor, 25));
+        maleLeftEyeGradient.addColorStop(1, eyeColor);
+        this.ctx.fillStyle = maleLeftEyeGradient;
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.415, size * 0.26, size * 0.032, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        const maleRightEyeGradient = this.ctx.createRadialGradient(
+            size * 0.585, size * 0.255, size * 0.01,
+            size * 0.585, size * 0.26, size * 0.032
+        );
+        maleRightEyeGradient.addColorStop(0, this.lightenColor(eyeColor, 25));
+        maleRightEyeGradient.addColorStop(1, eyeColor);
+        this.ctx.fillStyle = maleRightEyeGradient;
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.585, size * 0.26, size * 0.032, 0, Math.PI * 2);
         this.ctx.fill();
 
         // Pupils
         this.ctx.fillStyle = '#000';
         this.ctx.beginPath();
-        this.ctx.arc(size * 0.42, size * 0.265, size * 0.015, 0, Math.PI * 2);
+        this.ctx.arc(size * 0.415, size * 0.26, size * 0.016, 0, Math.PI * 2);
         this.ctx.fill();
         this.ctx.beginPath();
-        this.ctx.arc(size * 0.58, size * 0.265, size * 0.015, 0, Math.PI * 2);
+        this.ctx.arc(size * 0.585, size * 0.26, size * 0.016, 0, Math.PI * 2);
         this.ctx.fill();
 
-        // Eye highlights
-        this.ctx.fillStyle = 'white';
+        // Eye highlights - sharp and prominent
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
         this.ctx.beginPath();
-        this.ctx.arc(size * 0.425, size * 0.26, size * 0.008, 0, Math.PI * 2);
+        this.ctx.arc(size * 0.42, size * 0.253, size * 0.011, 0, Math.PI * 2);
         this.ctx.fill();
         this.ctx.beginPath();
-        this.ctx.arc(size * 0.585, size * 0.26, size * 0.008, 0, Math.PI * 2);
+        this.ctx.arc(size * 0.59, size * 0.253, size * 0.011, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Secondary highlights
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.41, size * 0.265, size * 0.006, 0, Math.PI * 2);
+        this.ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.58, size * 0.265, size * 0.006, 0, Math.PI * 2);
         this.ctx.fill();
 
         // Eyebrows - thicker for males
@@ -968,5 +1052,31 @@ class Renderer {
         // Window
         this.ctx.fillStyle = '#81d4fa';
         this.ctx.fillRect(screenX + width * 0.15, screenY + height * 0.5, width * 0.15, height * 0.15);
+    }
+
+    // Helper: Lighten a hex color by a percentage
+    lightenColor(color, percent) {
+        const num = parseInt(color.replace("#",""), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = (num >> 16) + amt;
+        const G = (num >> 8 & 0x00FF) + amt;
+        const B = (num & 0x0000FF) + amt;
+        return "#" + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+            (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+            (B < 255 ? B < 1 ? 0 : B : 255))
+            .toString(16).slice(1);
+    }
+
+    // Helper: Darken a hex color by a percentage
+    darkenColor(color, percent) {
+        const num = parseInt(color.replace("#",""), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = (num >> 16) - amt;
+        const G = (num >> 8 & 0x00FF) - amt;
+        const B = (num & 0x0000FF) - amt;
+        return "#" + (0x1000000 + (R > 0 ? R : 0) * 0x10000 +
+            (G > 0 ? G : 0) * 0x100 +
+            (B > 0 ? B : 0))
+            .toString(16).slice(1);
     }
 }

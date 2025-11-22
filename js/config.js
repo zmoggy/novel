@@ -3,7 +3,7 @@ const CONFIG = {
     // Canvas settings
     CANVAS_WIDTH: 1280,
     CANVAS_HEIGHT: 720,
-    TILE_SIZE: 32,
+    TILE_SIZE: 48, // Increased from 32 for larger, more detailed sprites
 
     // Game settings
     FPS: 60,
