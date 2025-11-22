@@ -9,6 +9,7 @@ class World {
         this.riverPath = [];
         this.houses = [];
         this.trees = [];
+        this.npcs = []; // NPCs reference for UI
 
         this.generateWorld();
     }
@@ -49,8 +50,18 @@ class World {
         // Initialize farm system for the farm area
         this.farm = new Farm(farmW, farmH);
 
-        // Create paths
-        this.createPath(farmX + farmW, farmY + Math.floor(farmH / 2), riverX, farmY + Math.floor(farmH / 2));
+        // Create paths and bridge
+        const bridgeY = farmY + Math.floor(farmH / 2); // Middle of farm
+
+        // Path from farm to river
+        this.createPath(farmX + farmW, bridgeY, riverX, bridgeY);
+
+        // Bridge across river (2 tiles wide)
+        this.tiles[bridgeY][riverX] = { type: 'bridge', walkable: true };
+        this.tiles[bridgeY][riverX + 1] = { type: 'bridge', walkable: true };
+
+        // Path from bridge to far side (to x=19, the far edge)
+        this.createPath(riverX + 2, bridgeY, this.width - 1, bridgeY);
 
         // Add player's house
         this.houses.push({

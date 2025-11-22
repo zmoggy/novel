@@ -904,6 +904,9 @@ class Renderer {
             case 'path':
                 color = '#a1887f';
                 break;
+            case 'bridge':
+                color = '#8d6e63'; // Wooden brown color for bridge
+                break;
             case 'wood':
                 color = '#795548';
                 break;
@@ -925,6 +928,27 @@ class Renderer {
                 this.ctx.lineTo(screenX + size - 2, screenY + i * (size / 4) + 4);
                 this.ctx.stroke();
             }
+        } else if (type === 'bridge') {
+            // Draw wooden planks (horizontal lines)
+            this.ctx.strokeStyle = 'rgba(0, 0, 0, 0.4)';
+            this.ctx.lineWidth = 2;
+            for (let i = 0; i < 5; i++) {
+                this.ctx.beginPath();
+                this.ctx.moveTo(screenX, screenY + i * (size / 5) + 2);
+                this.ctx.lineTo(screenX + size, screenY + i * (size / 5) + 2);
+                this.ctx.stroke();
+            }
+            // Add vertical support posts
+            this.ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+            this.ctx.lineWidth = 3;
+            this.ctx.beginPath();
+            this.ctx.moveTo(screenX + size / 4, screenY);
+            this.ctx.lineTo(screenX + size / 4, screenY + size);
+            this.ctx.stroke();
+            this.ctx.beginPath();
+            this.ctx.moveTo(screenX + 3 * size / 4, screenY);
+            this.ctx.lineTo(screenX + 3 * size / 4, screenY + size);
+            this.ctx.stroke();
         } else if (type === 'grass' || type === 'forest') {
             this.ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
             for (let i = 0; i < 3; i++) {

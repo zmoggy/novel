@@ -63,6 +63,9 @@ class Game {
             this.npcs.push(npc);
         });
 
+        // Store NPCs reference in world for UI access
+        this.world.npcs = this.npcs;
+
         // Initialize UI
         this.ui = new UI(this);
         this.ui.show();
