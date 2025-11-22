@@ -46,9 +46,60 @@ class InputHandler {
         });
 
         canvas.addEventListener('click', (e) => {
-            this.mouse.clicked = true;
-            this.handleClick(e);
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            // Convert screen coordinates to world coordinates
+            const worldX = mouseX + this.game.renderer.camera.x;
+            const worldY = mouseY + this.game.renderer.camera.y;
+
+            // Convert to tile coordinates
+            const tileX = Math.floor(worldX / CONFIG.TILE_SIZE);
+            const tileY = Math.floor(worldY / CONFIG.TILE_SIZE);
+
+            console.log(`Clicked at screen (${mouseX}, ${mouseY}), world (${worldX}, ${worldY}), tile (${tileX}, ${tileY})`);
+            console.log(`Current tool: ${this.game.player.currentTool}`);
+
+            // Use the current tool on the clicked tile
+            this.handleFarmingClick(tileX, tileY);
         });
+    }
+
+    handleFarmingClick(tileX, tileY) {
+        const player = this.game.player;
+
+        // Check if player has energy
+        if (player.energy <= 0) {
+            console.log('Not enough energy!');
+            return;
+        }
+
+        console.log(`Attempting to use ${player.currentTool} at tile (${tileX}, ${tileY})`);
+
+        // Perform action based on current tool
+        let result;
+        switch(player.currentTool) {
+            case 'hoe':
+                result = player.tillSoil(this.game.world, tileX, tileY);
+                break;
+            case 'seeds':
+                result = player.plantSeed(this.game.world, tileX, tileY);
+                break;
+            case 'wateringCan':
+                result = player.waterCrop(this.game.world, tileX, tileY);
+                break;
+            case 'hand':
+                result = player.harvestCrop(this.game.world, tileX, tileY);
+                break;
+            default:
+                console.log('No valid tool selected');
+                return;
+        }
+
+        if (result && result.message) {
+            console.log(result.message);
+        }
     }
 
     handleAction() {
