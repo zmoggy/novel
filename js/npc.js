@@ -7,6 +7,7 @@ class NPC extends Character {
         this.id = config.id;
         this.npcName = config.name;
         this.personality = config.personality;
+        this.portraitImage = config.portraitImage; // Character portrait image
         this.favoriteGifts = config.favoriteGifts;
         this.dialogues = config.dialogues; // Array of dialogue lines
         this.schedule = config.schedule;
