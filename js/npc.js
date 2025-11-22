@@ -92,17 +92,52 @@ class NPC extends Character {
         // Increase relationship
         this.relationship += 5;
 
-        // Choose dialogue based on relationship level (cycle through dialogues as relationship grows)
-        const dialogueLevel = Math.min(Math.floor(this.relationship / 20), this.dialogues.length - 1);
-        const message = this.dialogues[dialogueLevel];
+        // Determine relationship tier and get appropriate dialogue array
+        let dialogueTier = 0;
+        if (this.relationship >= 201) {
+            dialogueTier = 201;
+        } else if (this.relationship >= 161) {
+            dialogueTier = 161;
+        } else if (this.relationship >= 121) {
+            dialogueTier = 121;
+        } else if (this.relationship >= 81) {
+            dialogueTier = 81;
+        } else if (this.relationship >= 41) {
+            dialogueTier = 41;
+        } else {
+            dialogueTier = 0;
+        }
 
-        // Cycle to next dialogue for variety
-        this.dialogueIndex = (this.dialogueIndex + 1) % this.dialogues.length;
+        // Get dialogue array for this tier
+        const dialogueArray = this.dialogues[dialogueTier];
 
-        dialogueSystem.show(this.npcName, message, this, [
-            { text: 'Thanks!', action: () => {} },
-            { text: 'Want to help on the farm?', action: () => this.startHelping() }
-        ]);
+        // Pick a random dialogue from the tier
+        const randomIndex = Math.floor(Math.random() * dialogueArray.length);
+        const message = dialogueArray[randomIndex];
+
+        // Create interaction options based on relationship level
+        let options = [];
+
+        if (this.relationship < 80) {
+            options = [
+                { text: 'Nice talking to you.', action: () => {} },
+                { text: 'Want to help on the farm?', action: () => this.startHelping() }
+            ];
+        } else if (this.relationship < 160) {
+            options = [
+                { text: 'I enjoy our time together.', action: () => {} },
+                { text: 'Want to help on the farm?', action: () => this.startHelping() },
+                { text: 'You look great today!', action: () => this.relationship += 2 }
+            ];
+        } else {
+            options = [
+                { text: 'I love spending time with you.', action: () => {} },
+                { text: 'Want to help on the farm?', action: () => this.startHelping() },
+                { text: 'You mean everything to me.', action: () => this.relationship += 5 }
+            ];
+        }
+
+        dialogueSystem.show(this.npcName, message, this, options);
     }
 
     offerHelp(player) {

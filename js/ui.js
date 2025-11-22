@@ -5,6 +5,7 @@ class UI {
         this.screen = document.getElementById('game-ui');
         this.setupInventoryBar();
         this.setupHUD();
+        this.setupRelationshipPanel();
     }
 
     setupInventoryBar() {
@@ -20,6 +21,11 @@ class UI {
 
     setupHUD() {
         // HUD updates will be called from game loop
+    }
+
+    setupRelationshipPanel() {
+        this.relationshipList = document.getElementById('relationship-list');
+        this.updateRelationshipPanel();
     }
 
     updateInventoryBar() {
@@ -45,6 +51,52 @@ class UI {
         // Update date/time
         document.getElementById('dateDisplay').textContent = Utils.formatDate(time.day, time.season, time.year);
         document.getElementById('timeDisplay').textContent = Utils.formatTime(time.hours, time.minutes);
+
+        // Update relationship panel
+        this.updateRelationshipPanel();
+    }
+
+    updateRelationshipPanel() {
+        if (!this.game.world || !this.game.world.npcs) return;
+
+        this.relationshipList.innerHTML = '';
+
+        this.game.world.npcs.forEach(npc => {
+            const item = document.createElement('div');
+            item.className = 'relationship-item';
+
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'relationship-name';
+            nameSpan.textContent = npc.npcName;
+
+            const heartsDiv = document.createElement('div');
+            heartsDiv.className = 'relationship-hearts';
+
+            // Calculate heart level (each heart = 40 relationship points)
+            const maxHearts = 10;
+            const filledHearts = Math.min(Math.floor(npc.relationship / 40), maxHearts);
+            const emptyHearts = maxHearts - filledHearts;
+
+            // Add filled hearts
+            for (let i = 0; i < filledHearts; i++) {
+                const heart = document.createElement('span');
+                heart.className = 'heart filled';
+                heart.textContent = '❤️';
+                heartsDiv.appendChild(heart);
+            }
+
+            // Add empty hearts
+            for (let i = 0; i < emptyHearts; i++) {
+                const heart = document.createElement('span');
+                heart.className = 'heart empty';
+                heart.textContent = '♡';
+                heartsDiv.appendChild(heart);
+            }
+
+            item.appendChild(nameSpan);
+            item.appendChild(heartsDiv);
+            this.relationshipList.appendChild(item);
+        });
     }
 
     show() {

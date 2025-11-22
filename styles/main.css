@@ -281,6 +281,88 @@ body {
     transform: translateX(-5px);
 }
 
+/* Relationship Panel */
+#relationship-panel {
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 245, 0.95));
+    backdrop-filter: blur(10px);
+    border: 2px solid #ff85a1;
+    border-radius: 15px;
+    padding: 15px;
+    min-width: 250px;
+    max-width: 300px;
+    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
+}
+
+#relationship-panel h3 {
+    margin: 0 0 12px 0;
+    color: #c71585;
+    font-size: 1.2em;
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+}
+
+#relationship-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.relationship-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    background: linear-gradient(135deg, #fff, #ffe4e9);
+    border: 1px solid #ffb6c1;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.relationship-item:hover {
+    transform: translateX(5px);
+    border-color: #ff85a1;
+    box-shadow: 0 3px 10px rgba(255, 105, 180, 0.2);
+}
+
+.relationship-name {
+    font-weight: 600;
+    color: #6a4a7a;
+    font-size: 0.95em;
+}
+
+.relationship-hearts {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+}
+
+.relationship-hearts .heart {
+    font-size: 0.9em;
+    transition: transform 0.2s;
+}
+
+.relationship-hearts .heart.filled {
+    color: #ff1493;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.relationship-hearts .heart.empty {
+    color: #ddd;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
 /* Modal Screens */
 .modal {
     background: rgba(0, 0, 0, 0.8);
