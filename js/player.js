@@ -90,6 +90,8 @@ class Player extends Character {
 
         const tile = Utils.pixelToTile(this.x + this.width / 2, this.y + this.height / 2);
 
+        console.log(`Using tool: ${this.currentTool} at tile (${tile.x}, ${tile.y})`);
+
         switch(this.currentTool) {
             case 'hoe':
                 return this.tillSoil(world, tile.x, tile.y);
@@ -97,7 +99,7 @@ class Player extends Character {
                 return this.plantSeed(world, tile.x, tile.y);
             case 'wateringCan':
                 return this.waterCrop(world, tile.x, tile.y);
-            case 'scythe':
+            case 'hand':
                 return this.harvestCrop(world, tile.x, tile.y);
             default:
                 return { success: false };
@@ -105,7 +107,9 @@ class Player extends Character {
     }
 
     tillSoil(world, tileX, tileY) {
+        console.log(`Attempting to till soil at (${tileX}, ${tileY})`);
         const result = world.tillSoil(tileX, tileY);
+        console.log(`Till result: ${result}`);
         if (result) {
             this.energy -= 2;
             this.currentAction = 'hoeing';

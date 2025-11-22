@@ -20,12 +20,13 @@ class InputHandler {
             }
 
             // Handle number keys for tool selection
-            if (e.key >= '1' && e.key <= '5') {
+            if (e.key >= '1' && e.key <= '4') {
                 const toolIndex = parseInt(e.key) - 1;
-                const tools = ['hoe', 'seeds', 'wateringCan', 'scythe', 'hand'];
+                const tools = ['hoe', 'seeds', 'wateringCan', 'hand'];
                 if (tools[toolIndex]) {
                     this.game.player.selectTool(tools[toolIndex]);
                     this.game.ui.updateInventoryBar();
+                    console.log(`Selected tool: ${tools[toolIndex]}`);
                 }
             }
         });

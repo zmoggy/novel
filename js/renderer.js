@@ -82,19 +82,20 @@ class Renderer {
         this.ctx.ellipse(size / 2, size * 0.95, size * 0.3, size * 0.1, 0, 0, Math.PI * 2);
         this.ctx.fill();
 
-        // BACK HAIR LAYER (drawn first)
+        // BACK HAIR LAYER (drawn first) - only for long styles
         this.ctx.fillStyle = customization.hairColor || '#2c1b18';
         const hairStyle = customization.hairStyle || 'long';
 
-        // Draw back hair based on style
-        if (hairStyle === 'long' || hairStyle === 'ponytail') {
-            // Long hair back
+        // Draw back hair based on style - positioned BEHIND head
+        if (hairStyle === 'long') {
+            // Long hair flowing down the back
             this.ctx.beginPath();
-            this.ctx.ellipse(size / 2, size * 0.45, size * 0.35, size * 0.5, 0, 0, Math.PI * 2);
+            this.ctx.ellipse(size / 2, size * 0.55, size * 0.25, size * 0.35, 0, 0, Math.PI * 2);
             this.ctx.fill();
-        } else if (hairStyle === 'bob') {
+        } else if (hairStyle === 'ponytail') {
+            // Ponytail at back of head
             this.ctx.beginPath();
-            this.ctx.ellipse(size / 2, size * 0.35, size * 0.38, size * 0.3, 0, 0, Math.PI * 2);
+            this.ctx.ellipse(size * 0.5, size * 0.5, size * 0.12, size * 0.35, 0, 0, Math.PI * 2);
             this.ctx.fill();
         }
 
@@ -225,55 +226,66 @@ class Renderer {
         this.ctx.ellipse(size * 0.65, size * 0.3, size * 0.05, size * 0.04, 0, 0, Math.PI * 2);
         this.ctx.fill();
 
-        // FRONT HAIR LAYER
+        // FRONT HAIR LAYER - Clearly on top of head facing forward
         this.ctx.fillStyle = customization.hairColor || '#2c1b18';
 
         // Draw front hair based on style
         if (hairStyle === 'long') {
-            // Top of head
+            // Hair cap on top of head
             this.ctx.beginPath();
-            this.ctx.arc(size / 2, size * 0.15, size * 0.25, 0, Math.PI * 2);
+            this.ctx.arc(size / 2, size * 0.15, size * 0.25, Math.PI, Math.PI * 2);
             this.ctx.fill();
-            // Bangs
-            this.ctx.fillRect(size * 0.28, size * 0.15, size * 0.44, size * 0.12);
+            // Side hair
+            this.ctx.fillRect(size * 0.25, size * 0.15, size * 0.1, size * 0.2);
+            this.ctx.fillRect(size * 0.65, size * 0.15, size * 0.1, size * 0.2);
+            // Front bangs
+            this.ctx.fillRect(size * 0.3, size * 0.15, size * 0.4, size * 0.08);
         } else if (hairStyle === 'short') {
+            // Short hair top
             this.ctx.beginPath();
-            this.ctx.arc(size / 2, size * 0.18, size * 0.24, 0, Math.PI);
+            this.ctx.arc(size / 2, size * 0.15, size * 0.24, Math.PI, Math.PI * 2);
             this.ctx.fill();
+            // Side coverage
+            this.ctx.fillRect(size * 0.28, size * 0.15, size * 0.08, size * 0.12);
+            this.ctx.fillRect(size * 0.64, size * 0.15, size * 0.08, size * 0.12);
         } else if (hairStyle === 'curly') {
-            // Curly top
+            // Voluminous curly top
             this.ctx.beginPath();
-            this.ctx.arc(size * 0.5, size * 0.14, size * 0.2, 0, Math.PI * 2);
+            this.ctx.arc(size * 0.5, size * 0.12, size * 0.22, 0, Math.PI * 2);
+            this.ctx.fill();
+            // Side curls
+            this.ctx.beginPath();
+            this.ctx.arc(size * 0.32, size * 0.18, size * 0.14, 0, Math.PI * 2);
             this.ctx.fill();
             this.ctx.beginPath();
-            this.ctx.arc(size * 0.35, size * 0.18, size * 0.15, 0, Math.PI * 2);
-            this.ctx.fill();
-            this.ctx.beginPath();
-            this.ctx.arc(size * 0.65, size * 0.18, size * 0.15, 0, Math.PI * 2);
+            this.ctx.arc(size * 0.68, size * 0.18, size * 0.14, 0, Math.PI * 2);
             this.ctx.fill();
         } else if (hairStyle === 'pixie') {
+            // Pixie cut - short on top
             this.ctx.beginPath();
-            this.ctx.arc(size / 2, size * 0.18, size * 0.22, 0, Math.PI);
+            this.ctx.arc(size / 2, size * 0.14, size * 0.22, Math.PI, Math.PI * 2);
             this.ctx.fill();
-            // Side parts
-            this.ctx.fillRect(size * 0.3, size * 0.18, size * 0.08, size * 0.15);
-            this.ctx.fillRect(size * 0.62, size * 0.18, size * 0.08, size * 0.15);
+            // Slight side coverage
+            this.ctx.fillRect(size * 0.3, size * 0.14, size * 0.06, size * 0.12);
+            this.ctx.fillRect(size * 0.64, size * 0.14, size * 0.06, size * 0.12);
         } else if (hairStyle === 'bob') {
+            // Bob hair - covers top and sides
             this.ctx.beginPath();
-            this.ctx.arc(size / 2, size * 0.15, size * 0.24, 0, Math.PI * 2);
+            this.ctx.arc(size / 2, size * 0.13, size * 0.26, Math.PI, Math.PI * 2);
             this.ctx.fill();
+            // Side bob
+            this.ctx.fillRect(size * 0.24, size * 0.13, size * 0.1, size * 0.22);
+            this.ctx.fillRect(size * 0.66, size * 0.13, size * 0.1, size * 0.22);
             // Front bangs
-            this.ctx.fillRect(size * 0.3, size * 0.16, size * 0.4, size * 0.1);
+            this.ctx.fillRect(size * 0.28, size * 0.13, size * 0.44, size * 0.08);
         } else if (hairStyle === 'ponytail') {
-            // Front hair
+            // Front hair with pulled back look
             this.ctx.beginPath();
-            this.ctx.arc(size / 2, size * 0.15, size * 0.24, 0, Math.PI);
+            this.ctx.arc(size / 2, size * 0.14, size * 0.25, Math.PI, Math.PI * 2);
             this.ctx.fill();
-            // Ponytail
-            this.ctx.fillStyle = customization.hairColor;
-            this.ctx.beginPath();
-            this.ctx.ellipse(size * 0.5, size * 0.5, size * 0.12, size * 0.3, 0, 0, Math.PI * 2);
-            this.ctx.fill();
+            // Sides pulled back
+            this.ctx.fillRect(size * 0.26, size * 0.14, size * 0.06, size * 0.15);
+            this.ctx.fillRect(size * 0.68, size * 0.14, size * 0.06, size * 0.15);
         }
 
         // Hair highlights
@@ -363,7 +375,8 @@ class Renderer {
                 color = '#8b6f47';
                 break;
             case 'tilled':
-                color = '#6b5639';
+                // Dark brown tilled soil - very noticeable
+                color = '#5D4E37';
                 break;
             case 'water':
                 color = '#2196f3';
@@ -384,8 +397,18 @@ class Renderer {
         this.ctx.fillStyle = color;
         this.ctx.fillRect(screenX, screenY, size, size);
 
-        // Add texture
-        if (type === 'grass' || type === 'forest') {
+        // Add texture and details
+        if (type === 'tilled') {
+            // Draw furrow lines for tilled soil
+            this.ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
+            this.ctx.lineWidth = 2;
+            for (let i = 0; i < 4; i++) {
+                this.ctx.beginPath();
+                this.ctx.moveTo(screenX + 2, screenY + i * (size / 4) + 4);
+                this.ctx.lineTo(screenX + size - 2, screenY + i * (size / 4) + 4);
+                this.ctx.stroke();
+            }
+        } else if (type === 'grass' || type === 'forest') {
             this.ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
             for (let i = 0; i < 3; i++) {
                 const offsetX = Math.random() * size;
@@ -403,38 +426,94 @@ class Renderer {
 
         if (!crop.planted) return;
 
-        // Draw watered soil
+        // Draw watered soil - darker and more obvious
         if (crop.watered) {
-            this.ctx.fillStyle = '#4a3626';
+            this.ctx.fillStyle = '#3a2a1a';
             this.ctx.fillRect(screenX, screenY, size, size);
+            // Add wetness shine
+            this.ctx.fillStyle = 'rgba(100, 150, 255, 0.2)';
+            this.ctx.fillRect(screenX, screenY, size, size * 0.5);
         }
 
         // Draw plant based on growth stage
         const growthPercent = crop.growthStage / crop.maxGrowthStage;
 
         if (growthPercent < 0.25) {
-            // Seedling
+            // Tiny seedling - just sprouted
             this.ctx.fillStyle = '#9ccc65';
-            this.ctx.fillRect(screenX + size * 0.45, screenY + size * 0.6, size * 0.1, size * 0.2);
-        } else if (growthPercent < 0.5) {
-            // Small plant
-            this.ctx.fillStyle = '#7cb342';
-            this.ctx.fillRect(screenX + size * 0.4, screenY + size * 0.5, size * 0.2, size * 0.3);
-        } else if (growthPercent < 0.75) {
-            // Growing plant
-            this.ctx.fillStyle = '#689f38';
-            this.ctx.fillRect(screenX + size * 0.35, screenY + size * 0.4, size * 0.3, size * 0.4);
-        } else if (growthPercent >= 1) {
-            // Ready to harvest
-            this.ctx.fillStyle = '#558b2f';
-            this.ctx.fillRect(screenX + size * 0.3, screenY + size * 0.3, size * 0.4, size * 0.5);
-
-            // Fruit/vegetable
-            this.ctx.fillStyle = crop.type === 'tomato' ? '#f44336' :
-                                 crop.type === 'corn' ? '#fdd835' : '#e91e63';
+            this.ctx.fillRect(screenX + size * 0.45, screenY + size * 0.7, size * 0.1, size * 0.15);
+            // Two tiny leaves
             this.ctx.beginPath();
-            this.ctx.arc(screenX + size * 0.5, screenY + size * 0.4, size * 0.15, 0, Math.PI * 2);
+            this.ctx.arc(screenX + size * 0.48, screenY + size * 0.7, size * 0.05, 0, Math.PI * 2);
             this.ctx.fill();
+            this.ctx.beginPath();
+            this.ctx.arc(screenX + size * 0.52, screenY + size * 0.7, size * 0.05, 0, Math.PI * 2);
+            this.ctx.fill();
+        } else if (growthPercent < 0.5) {
+            // Small plant - growing
+            this.ctx.fillStyle = '#7cb342';
+            // Stem
+            this.ctx.fillRect(screenX + size * 0.46, screenY + size * 0.5, size * 0.08, size * 0.35);
+            // Leaves
+            this.ctx.beginPath();
+            this.ctx.arc(screenX + size * 0.4, screenY + size * 0.55, size * 0.1, 0, Math.PI * 2);
+            this.ctx.fill();
+            this.ctx.beginPath();
+            this.ctx.arc(screenX + size * 0.6, screenY + size * 0.55, size * 0.1, 0, Math.PI * 2);
+            this.ctx.fill();
+        } else if (growthPercent < 0.75) {
+            // Mature plant - almost ready
+            this.ctx.fillStyle = '#689f38';
+            // Thick stem
+            this.ctx.fillRect(screenX + size * 0.44, screenY + size * 0.4, size * 0.12, size * 0.45);
+            // Large leaves
+            this.ctx.beginPath();
+            this.ctx.arc(screenX + size * 0.35, screenY + size * 0.5, size * 0.12, 0, Math.PI * 2);
+            this.ctx.fill();
+            this.ctx.beginPath();
+            this.ctx.arc(screenX + size * 0.65, screenY + size * 0.5, size * 0.12, 0, Math.PI * 2);
+            this.ctx.fill();
+            // Small fruit forming
+            const fruitColor = crop.type === 'tomato' ? '#ff8a80' :
+                              crop.type === 'corn' ? '#fff176' : '#f48fb1';
+            this.ctx.fillStyle = fruitColor;
+            this.ctx.beginPath();
+            this.ctx.arc(screenX + size * 0.5, screenY + size * 0.45, size * 0.08, 0, Math.PI * 2);
+            this.ctx.fill();
+        } else if (growthPercent >= 1) {
+            // READY TO HARVEST - sparkle effect!
+            this.ctx.fillStyle = '#558b2f';
+            // Thick stem
+            this.ctx.fillRect(screenX + size * 0.44, screenY + size * 0.35, size * 0.12, size * 0.5);
+            // Large leaves
+            this.ctx.beginPath();
+            this.ctx.arc(screenX + size * 0.32, screenY + size * 0.5, size * 0.14, 0, Math.PI * 2);
+            this.ctx.fill();
+            this.ctx.beginPath();
+            this.ctx.arc(screenX + size * 0.68, screenY + size * 0.5, size * 0.14, 0, Math.PI * 2);
+            this.ctx.fill();
+
+            // Large ripe fruit
+            const ripeColor = crop.type === 'tomato' ? '#f44336' :
+                             crop.type === 'corn' ? '#fdd835' : '#e91e63';
+            this.ctx.fillStyle = ripeColor;
+            this.ctx.beginPath();
+            this.ctx.arc(screenX + size * 0.5, screenY + size * 0.4, size * 0.18, 0, Math.PI * 2);
+            this.ctx.fill();
+
+            // Highlight on fruit
+            this.ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+            this.ctx.beginPath();
+            this.ctx.arc(screenX + size * 0.52, screenY + size * 0.38, size * 0.06, 0, Math.PI * 2);
+            this.ctx.fill();
+
+            // Sparkle effect
+            const sparkleTime = Date.now() / 200;
+            if (Math.sin(sparkleTime) > 0) {
+                this.ctx.fillStyle = '#FFD700';
+                this.ctx.fillRect(screenX + size * 0.3, screenY + size * 0.25, size * 0.08, size * 0.02);
+                this.ctx.fillRect(screenX + size * 0.32, screenY + size * 0.23, size * 0.02, size * 0.08);
+            }
         }
     }
 

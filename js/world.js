@@ -152,8 +152,14 @@ class World {
         const farmTileX = tileX - this.farmArea.x;
         const farmTileY = tileY - this.farmArea.y;
 
+        console.log(`World tillSoil: tile (${tileX}, ${tileY}), farmArea: (${this.farmArea.x}, ${this.farmArea.y}, ${this.farmArea.width}, ${this.farmArea.height})`);
+        console.log(`Is in farm area: ${this.isInFarmArea(tileX, tileY)}`);
+
         if (this.isInFarmArea(tileX, tileY)) {
-            return this.farm.tillSoil(farmTileX, farmTileY);
+            console.log(`Calling farm.tillSoil with local coords (${farmTileX}, ${farmTileY})`);
+            const result = this.farm.tillSoil(farmTileX, farmTileY);
+            console.log(`Farm tillSoil result: ${result}`);
+            return result;
         }
         return false;
     }
@@ -216,6 +222,31 @@ class World {
         // Draw farm area
         const farmPixelX = this.farmArea.x * CONFIG.TILE_SIZE;
         const farmPixelY = this.farmArea.y * CONFIG.TILE_SIZE;
+        const farmPixelW = this.farmArea.width * CONFIG.TILE_SIZE;
+        const farmPixelH = this.farmArea.height * CONFIG.TILE_SIZE;
+
+        // Draw farm area border
+        renderer.ctx.save();
+        renderer.ctx.strokeStyle = '#FFD700';
+        renderer.ctx.lineWidth = 3;
+        renderer.ctx.setLineDash([10, 5]);
+        renderer.ctx.strokeRect(
+            farmPixelX - renderer.camera.x,
+            farmPixelY - renderer.camera.y,
+            farmPixelW,
+            farmPixelH
+        );
+        renderer.ctx.restore();
+
+        // Draw "FARM AREA" label
+        renderer.drawText(
+            'FARM AREA',
+            farmPixelX + farmPixelW / 2,
+            farmPixelY - 5,
+            '#FFD700',
+            16,
+            'center'
+        );
 
         renderer.ctx.save();
         renderer.ctx.translate(farmPixelX - renderer.camera.x, farmPixelY - renderer.camera.y);

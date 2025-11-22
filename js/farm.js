@@ -31,11 +31,14 @@ class Farm {
 
     tillSoil(x, y) {
         const tile = this.getTile(x, y);
+        console.log(`Farm tillSoil at (${x}, ${y}): tile =`, tile);
         if (tile && tile.type === 'grass' && !tile.tilled) {
+            console.log(`Tilling successful! Changing tile to tilled.`);
             tile.tilled = true;
             tile.type = 'tilled';
             return true;
         }
+        console.log(`Tilling failed. Tile type: ${tile?.type}, Already tilled: ${tile?.tilled}`);
         return false;
     }
 
