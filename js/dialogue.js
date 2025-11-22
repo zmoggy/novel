@@ -78,20 +78,28 @@ class DialogueSystem {
         // Clear previous portrait
         this.npcPortraitDiv.innerHTML = '';
 
+        // Debug logging
+        console.log('Drawing NPC portrait:', {
+            name: npc.npcName,
+            hasPortraitImage: !!npc.portraitImage,
+            portraitImage: npc.portraitImage
+        });
+
         // If NPC has a portrait image, use it
         if (npc.portraitImage) {
             const img = document.createElement('img');
             img.src = npc.portraitImage;
-            img.alt = npc.name;
+            img.alt = npc.npcName || npc.name;
             img.className = 'character-portrait';
             img.onerror = () => {
                 // Fallback to drawn sprite if image fails to load
-                console.log(`Failed to load portrait for ${npc.name}, using sprite fallback`);
+                console.log(`Failed to load portrait for ${npc.npcName}, using sprite fallback`);
                 this.drawSpritePortrait(npc, this.npcPortraitDiv);
             };
             this.npcPortraitDiv.appendChild(img);
         } else {
             // Fallback to drawn sprite
+            console.log('No portrait image found, using sprite');
             this.drawSpritePortrait(npc, this.npcPortraitDiv);
         }
     }
