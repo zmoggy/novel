@@ -150,14 +150,14 @@ const CONFIG = {
             },
             favoriteGifts: ['flowers', 'minerals', 'fruits'],
             dialogues: [
-                "The fields look vibrant today. Your dedication really shows.",
-                "I've been training nearby. Care to take a break and walk with me?",
-                "A strong harvest requires a strong spirit. Yours is remarkable.",
-                "The sunset suits you. Have you noticed how it brings out the warmth in your eyes?",
-                "I'll protect this farm—and you—no matter what comes.",
-                "Your resolve inspires me. Perhaps we could share a meal sometime?",
-                "These peaceful moments with you... I find myself wanting more of them.",
-                "I used to think battle was my only purpose. You've shown me there's more to life."
+                "Hey there, partner! Your farm's looking great. Keep up the good work!",
+                "I've been practicing my appraisal skills. Mind if I take a look at your harvest?",
+                "You know, I'm not exactly the hero type everyone thinks I am. But I'll do my best for you.",
+                "There's something peaceful about this place... Makes me want to stay a while longer.",
+                "I've faced plenty of battles, but nothing prepared me for how much I'd enjoy your company.",
+                "The others always say I'm too hard on myself. Maybe you could help me see what they see?",
+                "Between fighting and treasure appraisal, I thought I had life figured out. Then I met you.",
+                "I may not be the most perfect companion, but I promise to protect what matters to you."
             ],
             schedule: {
                 morning: { x: 15, y: 10 },
@@ -182,14 +182,14 @@ const CONFIG = {
             },
             favoriteGifts: ['minerals', 'fish', 'rare items'],
             dialogues: [
-                "...You're here. Good.",
-                "Don't push yourself too hard. Not everyone has to struggle alone.",
-                "I'm not good with words, but... your presence is tolerable. More than tolerable.",
-                "These crops you tend—they thrive under your care. It's... admirable.",
-                "Stay close if trouble comes. I won't let anything harm you.",
-                "You don't fear me? Most people do. You're... different.",
-                "I've lived with these horns my whole life. You look at me like you see past them.",
-                "Your farm, your life here... it's peaceful. Being near you makes the chaos fade."
+                "...Fine. What do you wish to say?",
+                "The reason people spend time alone is to enjoy peace and quiet. You understand such simple logic, surely?",
+                "There's no need to be so harsh. Let's have a chat.",
+                "Only when the true purpose of conflict is eradicated can peace descend. Your farm... it's a start.",
+                "When survival looms, you have two options: beg for mercy, or draw your sword. I chose the sword.",
+                "You don't look at me with fear. Most do. You're different.",
+                "Before the Lance of Fury fell into madness, they served as guardians. Power must have purpose.",
+                "I left Kremnos for various reasons. Being here with you... it's not one I regret."
             },
             schedule: {
                 morning: { x: 35, y: 8 },
@@ -213,14 +213,14 @@ const CONFIG = {
             },
             favoriteGifts: ['books', 'flowers', 'tea'],
             dialogues: [
-                "The morning mist suits this place. And you, as well.",
-                "I've been observing your farming techniques. Quite methodical and efficient.",
-                "In all my travels, I rarely found such tranquility. Perhaps I could stay... a while longer.",
-                "You handle the land with such care. It reminds me that not all strength is shown through force.",
-                "I'm not accustomed to opening up. But with you, words come easier.",
-                "The way you tend each plant... it's as if you understand what they need without words. Remarkable.",
-                "I carry many burdens from my past. Your company makes them feel lighter.",
-                "Would you... allow me to walk beside you more often? I find your presence calming."
+                "You wish to greet me? Go ahead. Though I think our usual way is just fine.",
+                "I'll keep watch tonight. Get some rest. We'll need our strength for tomorrow.",
+                "The farm is fraught with dangers. We must consider every possible method to ensure safety.",
+                "Though you may have many questions, allow me to introduce myself first. I am your companion, Dan Heng.",
+                "All living beings have their own ways of communication. Your dedication to the crops speaks volumes.",
+                "The Permanence shields all life. Your farm carries the same tranquility.",
+                "Whatever records we gather here will help create a complete understanding of this place.",
+                "At first, I had nowhere to call home. But before I knew it... every stop here became a new beginning for me."
             ],
             schedule: {
                 morning: { x: 18, y: 25 },
