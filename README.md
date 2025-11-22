@@ -2,13 +2,13 @@
 
 Welcome to Forest Farm! A charming browser-based farming game where you can grow crops, romance NPCs, customize your character, and enjoy life on your farm in the forest by the river.
 
-## ✨ Latest Updates
-- **FFT-Style Characters**: Beautiful Final Fantasy Tactics-inspired character sprites with detailed features
-- **Female Character**: Detailed female character with proper proportions, dress outfits, and facial features
-- **Working Farming**: Fully functional farming system with visual feedback
-- **Character Animations**: See your character perform actions (hoeing, planting, watering, harvesting)
-- **Draggable Furniture**: Click and drag to arrange furniture in your home
-- **Visible NPCs**: Romance options now have name tags and interaction prompts
+## ✨ Latest Updates (v2.0)
+- **Fixed Character Rendering**: Hair now faces forward properly - no more beard look!
+- **Enhanced Farming Visuals**: Tilled soil has furrows, crops show 4 growth stages with sparkles when ready
+- **Farm Area Border**: Golden dashed border shows exactly where you can farm
+- **Debug Logging**: Console logs help identify any farming issues
+- **Removed Scythe**: Simplified to 4 tools - use Hand to harvest
+- **Better Crop Graphics**: See seedlings, growing plants, and ripe fruit with highlights
 
 ## 🎮 Game Features
 
@@ -85,8 +85,7 @@ Decorate your house with furniture:
 - **1** - Select Hoe (till soil)
 - **2** - Select Seeds (plant crops)
 - **3** - Select Watering Can (water crops)
-- **4** - Select Scythe (harvest crops)
-- **5** - Select Hand (interact)
+- **4** - Select Hand (harvest/interact)
 
 ### UI Buttons
 - **Wardrobe** - Change your outfit
@@ -95,18 +94,30 @@ Decorate your house with furniture:
 ## 🚀 How to Play
 
 1. **Create Your Character** - Customize your appearance and choose your name
-2. **Learn the Basics**:
-   - Press **1** to select the hoe, then press **Space** to till soil
-   - Press **2** to select seeds, then press **Space** to plant
-   - Press **3** to select the watering can, then press **Space** to water
-   - Wait for crops to grow (they grow faster when watered!)
-   - Press **4** to select the scythe, then press **Space** to harvest when ready
-3. **Meet the NPCs** - Walk up to NPCs and press **Space** to talk to them
-4. **Manage Your Resources**:
+2. **Find the Farm**:
+   - Look for the golden dashed border labeled "FARM AREA"
+   - Walk into the farm area (green grass inside the border)
+3. **Start Farming** (Step by step):
+   - Press **1** to select the hoe, then press **Space** to till soil (you'll see dark brown furrows)
+   - Press **2** to select seeds, then press **Space** to plant (tiny seedling appears)
+   - Press **3** to select the watering can, then press **Space** to water (soil gets darker with blue shine)
+   - Wait for crops to grow through 4 stages (faster when watered!):
+     * Seedling → Small plant → Mature plant → **Ripe with sparkles!**
+   - Press **4** to select hand, then press **Space** to harvest when you see sparkles
+4. **Meet the NPCs** - Walk up to NPCs (you'll see their names) and press **Space** to talk
+5. **Manage Your Resources**:
    - Keep an eye on your **energy** (top right)
    - Watch your **money** grow as you sell crops
    - Time passes as you play - each day your energy restores
-5. **Customize** - Use the Wardrobe and Decorate buttons to personalize your experience
+6. **Customize** - Use the Wardrobe and Decorate buttons to personalize your experience
+
+## 🐛 Troubleshooting
+
+**If farming doesn't work:**
+1. Make sure you're inside the golden "FARM AREA" border
+2. Open browser console (F12) to see debug logs
+3. Check that you're selecting tools (keys 1-4) before pressing Space
+4. Make sure you have energy (top right corner)
 
 ## 💡 Tips
 
