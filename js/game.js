@@ -61,10 +61,12 @@ class Game {
         CONFIG.NPCS.forEach(npcConfig => {
             const npc = new NPC(npcConfig);
             this.npcs.push(npc);
+            console.log('Created NPC:', npc.npcName, 'at', npc.x, npc.y);
         });
 
         // Store NPCs reference in world for UI access
         this.world.npcs = this.npcs;
+        console.log('Stored NPCs in world.npcs, count:', this.world.npcs.length);
 
         // Initialize UI
         this.ui = new UI(this);

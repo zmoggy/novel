@@ -52,16 +52,26 @@ class World {
 
         // Create paths and bridge
         const bridgeY = farmY + Math.floor(farmH / 2); // Middle of farm
+        const bridgeWidth = 4; // 4 tiles wide bridge
 
         // Path from farm to river
-        this.createPath(farmX + farmW, bridgeY, riverX, bridgeY);
+        for (let y = bridgeY - 1; y <= bridgeY + 2; y++) {
+            this.createPath(farmX + farmW, y, riverX - 1, y);
+        }
 
-        // Bridge across river (2 tiles wide)
-        this.tiles[bridgeY][riverX] = { type: 'bridge', walkable: true };
-        this.tiles[bridgeY][riverX + 1] = { type: 'bridge', walkable: true };
+        // Wide bridge across river (4 tiles wide, spanning the river)
+        for (let y = bridgeY - 1; y <= bridgeY + 2; y++) {
+            for (let x = riverX; x < riverX + 2; x++) {
+                if (this.isValidTile(x, y)) {
+                    this.tiles[y][x] = { type: 'bridge', walkable: true };
+                }
+            }
+        }
 
-        // Path from bridge to far side (to x=19, the far edge)
-        this.createPath(riverX + 2, bridgeY, this.width - 1, bridgeY);
+        // Path from bridge to far side (to x=19, the far edge) - wider path
+        for (let y = bridgeY - 1; y <= bridgeY + 2; y++) {
+            this.createPath(riverX + 2, y, this.width - 1, y);
+        }
 
         // Add player's house
         this.houses.push({
