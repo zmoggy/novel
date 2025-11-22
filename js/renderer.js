@@ -287,6 +287,11 @@ class Renderer {
 
     // Draw a detailed FFT-style character (used for player and NPCs)
     drawCharacter(x, y, customization, action = null) {
+        // Route to male character renderer if specified
+        if (customization.isMale) {
+            return this.drawMaleCharacter(x, y, customization, action);
+        }
+
         const screenX = x - this.camera.x;
         const screenY = y - this.camera.y;
         const size = CONFIG.TILE_SIZE;
@@ -504,6 +509,221 @@ class Renderer {
                 this.ctx.stroke();
             }
         }
+
+        this.ctx.restore();
+    }
+
+    // Draw male NPCs (Honkai Star Rail style)
+    drawMaleCharacter(x, y, customization, action = null) {
+        const screenX = x - this.camera.x;
+        const screenY = y - this.camera.y;
+        const size = CONFIG.TILE_SIZE;
+
+        this.ctx.save();
+        this.ctx.translate(screenX, screenY);
+
+        // Shadow
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+        this.ctx.beginPath();
+        this.ctx.ellipse(size / 2, size * 0.95, size * 0.3, size * 0.1, 0, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        const hairColor = customization.hairColor;
+        const hairStyle = customization.hairStyle;
+        const eyeColor = customization.eyeColor;
+        const skinTone = customization.skinTone || '#fce5cd';
+        const colors = customization.outfitColors;
+
+        // BACK HAIR LAYER
+        this.ctx.fillStyle = hairColor;
+        if (hairStyle === 'long') {
+            // Dan Heng - long flowing hair
+            this.ctx.beginPath();
+            this.ctx.ellipse(size / 2, size * 0.55, size * 0.28, size * 0.4, 0, 0, Math.PI * 2);
+            this.ctx.fill();
+        }
+
+        // BODY - Male outfit (armor/coat style)
+        // Main body/coat
+        this.ctx.fillStyle = colors.primary;
+        this.ctx.fillRect(size * 0.3, size * 0.45, size * 0.4, size * 0.5);
+
+        // Accent pieces
+        this.ctx.fillStyle = colors.secondary;
+        this.ctx.fillRect(size * 0.28, size * 0.45, size * 0.44, size * 0.08);
+
+        // Gold/accent trim
+        this.ctx.fillStyle = colors.accent;
+        this.ctx.fillRect(size * 0.32, size * 0.52, size * 0.36, size * 0.03);
+        this.ctx.fillRect(size * 0.32, size * 0.7, size * 0.36, size * 0.03);
+
+        // Shoulders/armor
+        this.ctx.fillStyle = colors.secondary;
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.27, size * 0.48, size * 0.1, 0, Math.PI * 2);
+        this.ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.73, size * 0.48, size * 0.1, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Arms
+        this.ctx.fillStyle = colors.primary;
+        this.ctx.fillRect(size * 0.15, size * 0.5, size * 0.1, size * 0.35);
+        this.ctx.fillRect(size * 0.75, size * 0.5, size * 0.1, size * 0.35);
+
+        // Hands
+        this.ctx.fillStyle = skinTone;
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.2, size * 0.87, size * 0.07, 0, Math.PI * 2);
+        this.ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.8, size * 0.87, size * 0.07, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Neck
+        this.ctx.fillStyle = skinTone;
+        this.ctx.fillRect(size * 0.42, size * 0.38, size * 0.16, size * 0.1);
+
+        // HEAD
+        this.ctx.fillStyle = skinTone;
+        this.ctx.beginPath();
+        this.ctx.arc(size / 2, size * 0.25, size * 0.2, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // FACIAL FEATURES
+        // Eyes - more angular for males
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillRect(size * 0.38, size * 0.24, size * 0.08, size * 0.05);
+        this.ctx.fillRect(size * 0.54, size * 0.24, size * 0.08, size * 0.05);
+
+        // Irises
+        this.ctx.fillStyle = eyeColor;
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.42, size * 0.265, size * 0.03, 0, Math.PI * 2);
+        this.ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.58, size * 0.265, size * 0.03, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Pupils
+        this.ctx.fillStyle = '#000';
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.42, size * 0.265, size * 0.015, 0, Math.PI * 2);
+        this.ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.58, size * 0.265, size * 0.015, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Eye highlights
+        this.ctx.fillStyle = 'white';
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.425, size * 0.26, size * 0.008, 0, Math.PI * 2);
+        this.ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.arc(size * 0.585, size * 0.26, size * 0.008, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Eyebrows - thicker for males
+        this.ctx.strokeStyle = hairColor;
+        this.ctx.lineWidth = 2;
+        this.ctx.beginPath();
+        this.ctx.moveTo(size * 0.36, size * 0.21);
+        this.ctx.lineTo(size * 0.46, size * 0.22);
+        this.ctx.stroke();
+        this.ctx.beginPath();
+        this.ctx.moveTo(size * 0.54, size * 0.22);
+        this.ctx.lineTo(size * 0.64, size * 0.21);
+        this.ctx.stroke();
+
+        // Nose
+        this.ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+        this.ctx.lineWidth = 1.5;
+        this.ctx.beginPath();
+        this.ctx.moveTo(size * 0.5, size * 0.28);
+        this.ctx.lineTo(size * 0.52, size * 0.32);
+        this.ctx.stroke();
+
+        // Mouth - neutral expression
+        this.ctx.strokeStyle = '#d1828b';
+        this.ctx.lineWidth = 1.5;
+        this.ctx.beginPath();
+        this.ctx.moveTo(size * 0.44, size * 0.35);
+        this.ctx.lineTo(size * 0.56, size * 0.35);
+        this.ctx.stroke();
+
+        // FRONT HAIR LAYER
+        this.ctx.fillStyle = hairColor;
+
+        if (hairStyle === 'spiky') {
+            // Phainon - spiky blonde hair
+            // Top spikes
+            for (let i = 0; i < 5; i++) {
+                this.ctx.beginPath();
+                this.ctx.moveTo(size * (0.3 + i * 0.1), size * 0.15);
+                this.ctx.lineTo(size * (0.35 + i * 0.1), size * 0.08);
+                this.ctx.lineTo(size * (0.4 + i * 0.1), size * 0.15);
+                this.ctx.fill();
+            }
+            // Hair cap
+            this.ctx.beginPath();
+            this.ctx.arc(size / 2, size * 0.15, size * 0.22, Math.PI, Math.PI * 2);
+            this.ctx.fill();
+            // Side hair
+            this.ctx.fillRect(size * 0.28, size * 0.15, size * 0.08, size * 0.15);
+            this.ctx.fillRect(size * 0.64, size * 0.15, size * 0.08, size * 0.15);
+        } else if (hairStyle === 'messy') {
+            // Mydei - messy dark hair with horns
+            // Messy top
+            this.ctx.beginPath();
+            this.ctx.arc(size * 0.45, size * 0.12, size * 0.14, 0, Math.PI * 2);
+            this.ctx.fill();
+            this.ctx.beginPath();
+            this.ctx.arc(size * 0.55, size * 0.14, size * 0.16, 0, Math.PI * 2);
+            this.ctx.fill();
+            // Messy front
+            this.ctx.fillRect(size * 0.32, size * 0.14, size * 0.36, size * 0.12);
+            // Sideburns
+            this.ctx.fillRect(size * 0.26, size * 0.2, size * 0.08, size * 0.12);
+            this.ctx.fillRect(size * 0.66, size * 0.2, size * 0.08, size * 0.12);
+
+            // HORNS (for Mydei)
+            if (customization.hasHorns) {
+                this.ctx.fillStyle = '#FFD700';
+                this.ctx.strokeStyle = '#B8860B';
+                this.ctx.lineWidth = 1;
+                // Left horn
+                this.ctx.beginPath();
+                this.ctx.moveTo(size * 0.35, size * 0.12);
+                this.ctx.lineTo(size * 0.32, size * 0.02);
+                this.ctx.lineTo(size * 0.38, size * 0.1);
+                this.ctx.fill();
+                this.ctx.stroke();
+                // Right horn
+                this.ctx.beginPath();
+                this.ctx.moveTo(size * 0.65, size * 0.12);
+                this.ctx.lineTo(size * 0.68, size * 0.02);
+                this.ctx.lineTo(size * 0.62, size * 0.1);
+                this.ctx.fill();
+                this.ctx.stroke();
+            }
+        } else if (hairStyle === 'long') {
+            // Dan Heng - long silver hair
+            // Top cap
+            this.ctx.beginPath();
+            this.ctx.arc(size / 2, size * 0.14, size * 0.26, Math.PI, Math.PI * 2);
+            this.ctx.fill();
+            // Side strands
+            this.ctx.fillRect(size * 0.24, size * 0.14, size * 0.1, size * 0.25);
+            this.ctx.fillRect(size * 0.66, size * 0.14, size * 0.1, size * 0.25);
+            // Center parting
+            this.ctx.fillRect(size * 0.34, size * 0.14, size * 0.32, size * 0.12);
+        }
+
+        // Hair shine/highlight
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+        this.ctx.beginPath();
+        this.ctx.ellipse(size * 0.45, size * 0.16, size * 0.08, size * 0.05, -0.3, 0, Math.PI * 2);
+        this.ctx.fill();
 
         this.ctx.restore();
     }

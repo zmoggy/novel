@@ -77,6 +77,9 @@ class Game {
         // Initialize decoration
         this.decoration = new Decoration(this.player, this.world);
 
+        // Set renderer for dialogue system (for portraits)
+        this.dialogueSystem.setRenderer(this.renderer);
+
         // Change state to playing
         this.state = 'playing';
     }

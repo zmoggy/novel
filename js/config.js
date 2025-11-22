@@ -132,19 +132,33 @@ const CONFIG = {
         }
     ],
 
-    // Romance NPCs
+    // Romance NPCs - Honkai Star Rail inspired
     NPCS: [
         {
-            id: 'alex',
-            name: 'Alex',
-            personality: 'friendly and energetic',
-            favoriteGifts: ['flowers', 'tomatoes'],
-            dialogue: {
-                greeting: "Hey there! Beautiful day for farming, isn't it?",
-                help: "Let me help you with that!",
-                gift: "For me? You're so thoughtful!",
-                romance: "I really enjoy spending time with you..."
+            id: 'phainon',
+            name: 'Phainon',
+            personality: 'heroic and warmhearted',
+            appearance: {
+                hairColor: '#FFD89A', // Golden blonde
+                hairStyle: 'spiky',
+                eyeColor: '#8B4513', // Brown
+                outfitColors: {
+                    primary: '#DC143C', // Crimson red
+                    secondary: '#FFD700', // Gold
+                    accent: '#8B0000' // Dark red
+                }
             },
+            favoriteGifts: ['flowers', 'minerals', 'fruits'],
+            dialogues: [
+                "The fields look vibrant today. Your dedication really shows.",
+                "I've been training nearby. Care to take a break and walk with me?",
+                "A strong harvest requires a strong spirit. Yours is remarkable.",
+                "The sunset suits you. Have you noticed how it brings out the warmth in your eyes?",
+                "I'll protect this farm—and you—no matter what comes.",
+                "Your resolve inspires me. Perhaps we could share a meal sometime?",
+                "These peaceful moments with you... I find myself wanting more of them.",
+                "I used to think battle was my only purpose. You've shown me there's more to life."
+            ],
             schedule: {
                 morning: { x: 15, y: 10 },
                 afternoon: { x: 20, y: 15 },
@@ -152,15 +166,30 @@ const CONFIG = {
             }
         },
         {
-            id: 'sam',
-            name: 'Sam',
-            personality: 'artistic and thoughtful',
-            favoriteGifts: ['flowers', 'fruits'],
-            dialogue: {
-                greeting: "Oh! I was just thinking about you.",
-                help: "I'd be happy to lend a hand!",
-                gift: "This is wonderful, thank you!",
-                romance: "Your farm is coming along beautifully... just like you."
+            id: 'mydei',
+            name: 'Mydei',
+            personality: 'intense and passionate',
+            appearance: {
+                hairColor: '#2F1F1F', // Dark brown/black
+                hairStyle: 'messy',
+                eyeColor: '#FF6B6B', // Red
+                outfitColors: {
+                    primary: '#4A4A4A', // Dark gray
+                    secondary: '#00CED1', // Cyan/turquoise
+                    accent: '#FFD700' // Gold
+                },
+                hasHorns: true
+            },
+            favoriteGifts: ['minerals', 'fish', 'rare items'],
+            dialogues: [
+                "...You're here. Good.",
+                "Don't push yourself too hard. Not everyone has to struggle alone.",
+                "I'm not good with words, but... your presence is tolerable. More than tolerable.",
+                "These crops you tend—they thrive under your care. It's... admirable.",
+                "Stay close if trouble comes. I won't let anything harm you.",
+                "You don't fear me? Most people do. You're... different.",
+                "I've lived with these horns my whole life. You look at me like you see past them.",
+                "Your farm, your life here... it's peaceful. Being near you makes the chaos fade."
             },
             schedule: {
                 morning: { x: 35, y: 8 },
@@ -169,16 +198,30 @@ const CONFIG = {
             }
         },
         {
-            id: 'riley',
-            name: 'Riley',
-            personality: 'adventurous and playful',
-            favoriteGifts: ['fish', 'minerals'],
-            dialogue: {
-                greeting: "Ready for another adventure?",
-                help: "Two hands are better than one!",
-                gift: "Awesome! I love it!",
-                romance: "You know, this farm feels like home... because you're here."
+            id: 'danheng',
+            name: 'Dan Heng',
+            personality: 'calm and composed',
+            appearance: {
+                hairColor: '#E6F2FF', // Silver/white
+                hairStyle: 'long',
+                eyeColor: '#00CED1', // Cyan
+                outfitColors: {
+                    primary: '#B0C4DE', // Light blue/steel
+                    secondary: '#4682B4', // Steel blue
+                    accent: '#FFD700' // Gold
+                }
             },
+            favoriteGifts: ['books', 'flowers', 'tea'],
+            dialogues: [
+                "The morning mist suits this place. And you, as well.",
+                "I've been observing your farming techniques. Quite methodical and efficient.",
+                "In all my travels, I rarely found such tranquility. Perhaps I could stay... a while longer.",
+                "You handle the land with such care. It reminds me that not all strength is shown through force.",
+                "I'm not accustomed to opening up. But with you, words come easier.",
+                "The way you tend each plant... it's as if you understand what they need without words. Remarkable.",
+                "I carry many burdens from my past. Your company makes them feel lighter.",
+                "Would you... allow me to walk beside you more often? I find your presence calming."
+            ],
             schedule: {
                 morning: { x: 18, y: 25 },
                 afternoon: { x: 12, y: 28 },

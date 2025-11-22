@@ -8,27 +8,30 @@ class NPC extends Character {
         this.npcName = config.name;
         this.personality = config.personality;
         this.favoriteGifts = config.favoriteGifts;
-        this.dialogue = config.dialogue;
+        this.dialogues = config.dialogues; // Array of dialogue lines
         this.schedule = config.schedule;
         this.relationship = 0;
-        this.currentDialogue = config.dialogue.greeting;
+        this.dialogueIndex = 0; // Track which dialogue to show
         this.helpCooldown = 0;
         this.targetX = this.x;
         this.targetY = this.y;
         this.walkSpeed = 1.5;
         this.isHelping = false;
+        this.appearance = config.appearance; // Specific appearance from config
 
-        // Random appearance for each NPC
+        // Create customization from appearance config
         this.customization = this.generateAppearance();
     }
 
     generateAppearance() {
         return {
-            skinTone: Utils.randomChoice(CONFIG.SKIN_TONES),
-            hairStyle: Utils.randomChoice(CONFIG.HAIR_STYLES),
-            hairColor: Utils.randomChoice(CONFIG.HAIR_COLORS),
-            eyeColor: Utils.randomChoice(CONFIG.EYE_COLORS),
-            outfit: Utils.randomChoice(CONFIG.OUTFITS.filter(o => o.unlocked))
+            skinTone: '#fce5cd', // Light skin tone for anime characters
+            hairStyle: this.appearance.hairStyle,
+            hairColor: this.appearance.hairColor,
+            eyeColor: this.appearance.eyeColor,
+            outfitColors: this.appearance.outfitColors,
+            hasHorns: this.appearance.hasHorns || false,
+            isMale: true // Flag for male character rendering
         };
     }
 
@@ -88,17 +91,14 @@ class NPC extends Character {
         // Increase relationship
         this.relationship += 5;
 
-        // Choose dialogue based on relationship
-        let message;
-        if (this.relationship > 100) {
-            message = this.dialogue.romance;
-        } else if (this.relationship > 50) {
-            message = this.dialogue.gift;
-        } else {
-            message = this.dialogue.greeting;
-        }
+        // Choose dialogue based on relationship level (cycle through dialogues as relationship grows)
+        const dialogueLevel = Math.min(Math.floor(this.relationship / 20), this.dialogues.length - 1);
+        const message = this.dialogues[dialogueLevel];
 
-        dialogueSystem.show(this.npcName, message, [
+        // Cycle to next dialogue for variety
+        this.dialogueIndex = (this.dialogueIndex + 1) % this.dialogues.length;
+
+        dialogueSystem.show(this.npcName, message, this, [
             { text: 'Thanks!', action: () => {} },
             { text: 'Want to help on the farm?', action: () => this.startHelping() }
         ]);
