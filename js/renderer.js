@@ -586,25 +586,49 @@ class Renderer {
             this.ctx.fill();
         }
 
-        // BODY - Male outfit (armor/coat style)
-        // Main body/coat
-        this.ctx.fillStyle = colors.primary;
+        // BODY - Male outfit (armor/coat style) with gradient shading
+        // Main body/coat with gradient
+        const bodyGradient = this.ctx.createLinearGradient(size * 0.3, size * 0.45, size * 0.7, size * 0.95);
+        bodyGradient.addColorStop(0, colors.primary);
+        bodyGradient.addColorStop(1, this.darkenColor(colors.primary, 15));
+        this.ctx.fillStyle = bodyGradient;
         this.ctx.fillRect(size * 0.3, size * 0.45, size * 0.4, size * 0.5);
 
-        // Accent pieces
-        this.ctx.fillStyle = colors.secondary;
+        // Accent pieces with subtle gradient
+        const accentGradient = this.ctx.createLinearGradient(size * 0.28, size * 0.45, size * 0.72, size * 0.53);
+        accentGradient.addColorStop(0, colors.secondary);
+        accentGradient.addColorStop(1, this.darkenColor(colors.secondary, 10));
+        this.ctx.fillStyle = accentGradient;
         this.ctx.fillRect(size * 0.28, size * 0.45, size * 0.44, size * 0.08);
 
-        // Gold/accent trim
-        this.ctx.fillStyle = colors.accent;
+        // Gold/accent trim with shine
+        const trimGradient = this.ctx.createLinearGradient(size * 0.32, size * 0.52, size * 0.68, size * 0.52);
+        trimGradient.addColorStop(0, this.darkenColor(colors.accent, 10));
+        trimGradient.addColorStop(0.5, colors.accent);
+        trimGradient.addColorStop(1, this.darkenColor(colors.accent, 10));
+        this.ctx.fillStyle = trimGradient;
         this.ctx.fillRect(size * 0.32, size * 0.52, size * 0.36, size * 0.03);
         this.ctx.fillRect(size * 0.32, size * 0.7, size * 0.36, size * 0.03);
 
-        // Shoulders/armor
-        this.ctx.fillStyle = colors.secondary;
+        // Shoulders/armor with metallic shading
+        const leftShoulderGradient = this.ctx.createRadialGradient(
+            size * 0.25, size * 0.46, size * 0.02,
+            size * 0.27, size * 0.48, size * 0.1
+        );
+        leftShoulderGradient.addColorStop(0, this.lightenColor(colors.secondary, 20));
+        leftShoulderGradient.addColorStop(1, colors.secondary);
+        this.ctx.fillStyle = leftShoulderGradient;
         this.ctx.beginPath();
         this.ctx.arc(size * 0.27, size * 0.48, size * 0.1, 0, Math.PI * 2);
         this.ctx.fill();
+
+        const rightShoulderGradient = this.ctx.createRadialGradient(
+            size * 0.75, size * 0.46, size * 0.02,
+            size * 0.73, size * 0.48, size * 0.1
+        );
+        rightShoulderGradient.addColorStop(0, this.lightenColor(colors.secondary, 20));
+        rightShoulderGradient.addColorStop(1, colors.secondary);
+        this.ctx.fillStyle = rightShoulderGradient;
         this.ctx.beginPath();
         this.ctx.arc(size * 0.73, size * 0.48, size * 0.1, 0, Math.PI * 2);
         this.ctx.fill();

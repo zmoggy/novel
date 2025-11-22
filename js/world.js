@@ -1,11 +1,11 @@
 // World class - manages the game world (forest, river, farm, houses)
 class World {
     constructor() {
-        this.width = 50; // tiles
-        this.height = 50; // tiles
+        this.width = 20; // tiles - smaller, cozier world focused on characters
+        this.height = 20; // tiles
         this.tiles = [];
         this.farm = null;
-        this.farmArea = { x: 10, y: 15, width: 15, height: 15 };
+        this.farmArea = { x: 4, y: 6, width: 8, height: 8 }; // Cozy 8x8 farm
         this.riverPath = [];
         this.houses = [];
         this.trees = [];
@@ -23,9 +23,9 @@ class World {
         }
 
         // Create river (vertical river on the right side)
-        const riverX = 35;
+        const riverX = 15;
         for (let y = 0; y < this.height; y++) {
-            for (let x = riverX; x < riverX + 3; x++) {
+            for (let x = riverX; x < riverX + 2; x++) {
                 if (x < this.width) {
                     this.tiles[y][x] = { type: 'water', walkable: false };
                     this.riverPath.push({ x, y });

@@ -3,7 +3,7 @@ const CONFIG = {
     // Canvas settings
     CANVAS_WIDTH: 1280,
     CANVAS_HEIGHT: 720,
-    TILE_SIZE: 48, // Increased from 32 for larger, more detailed sprites
+    TILE_SIZE: 64, // Large sprites for detailed character visuals (was 32, then 48, now 64!)
 
     // Game settings
     FPS: 60,
@@ -195,9 +195,9 @@ const CONFIG = {
                 ]
             },
             schedule: {
-                morning: { x: 15, y: 10 },
-                afternoon: { x: 20, y: 15 },
-                evening: { x: 25, y: 12 }
+                morning: { x: 8, y: 5 },
+                afternoon: { x: 12, y: 8 },
+                evening: { x: 14, y: 6 }
             }
         },
         {
@@ -261,9 +261,9 @@ const CONFIG = {
                 ]
             },
             schedule: {
-                morning: { x: 35, y: 8 },
-                afternoon: { x: 30, y: 20 },
-                evening: { x: 38, y: 10 }
+                morning: { x: 17, y: 4 },
+                afternoon: { x: 13, y: 12 },
+                evening: { x: 18, y: 7 }
             }
         },
         {
@@ -328,9 +328,9 @@ const CONFIG = {
                 ]
             },
             schedule: {
-                morning: { x: 18, y: 25 },
-                afternoon: { x: 12, y: 28 },
-                evening: { x: 22, y: 30 }
+                morning: { x: 9, y: 14 },
+                afternoon: { x: 6, y: 16 },
+                evening: { x: 11, y: 17 }
             }
         }
     ],
