@@ -25,10 +25,6 @@ class UI {
 
     setupRelationshipPanel() {
         this.relationshipList = document.getElementById('relationship-list');
-        console.log('Relationship list element:', this.relationshipList);
-        if (!this.relationshipList) {
-            console.error('ERROR: relationship-list element not found in DOM!');
-        }
         this.updateRelationshipPanel();
     }
 
@@ -61,20 +57,11 @@ class UI {
     }
 
     updateRelationshipPanel() {
-        console.log('updateRelationshipPanel called');
-        console.log('game.world:', this.game.world);
-        console.log('game.world.npcs:', this.game.world?.npcs);
+        if (!this.game.world || !this.game.world.npcs) return;
 
-        if (!this.game.world || !this.game.world.npcs) {
-            console.log('No world or NPCs found, returning early');
-            return;
-        }
-
-        console.log('NPCs found:', this.game.world.npcs.length);
         this.relationshipList.innerHTML = '';
 
         this.game.world.npcs.forEach(npc => {
-            console.log('Creating relationship item for:', npc.npcName, 'relationship:', npc.relationship);
             const item = document.createElement('div');
             item.className = 'relationship-item';
 
