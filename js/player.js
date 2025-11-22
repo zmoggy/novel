@@ -27,6 +27,8 @@ class Player extends Character {
         };
         this.currentAction = null;
         this.actionTimer = 0;
+        this.walkTarget = null;
+        this.walkCallback = null;
     }
 
     update(deltaTime, input, world) {
@@ -41,27 +43,58 @@ class Player extends Character {
         // Handle movement
         this.moveDirection = { x: 0, y: 0 };
 
-        if (input.keys['ArrowUp'] || input.keys['w']) {
-            this.moveDirection.y = -1;
-            this.direction = 'up';
-        }
-        if (input.keys['ArrowDown'] || input.keys['s']) {
-            this.moveDirection.y = 1;
-            this.direction = 'down';
-        }
-        if (input.keys['ArrowLeft'] || input.keys['a']) {
-            this.moveDirection.x = -1;
-            this.direction = 'left';
-        }
-        if (input.keys['ArrowRight'] || input.keys['d']) {
-            this.moveDirection.x = 1;
-            this.direction = 'right';
-        }
+        // Check if we have a walk target (click-to-walk)
+        if (this.walkTarget) {
+            const dx = this.walkTarget.x - this.x;
+            const dy = this.walkTarget.y - this.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Normalize diagonal movement
-        if (this.moveDirection.x !== 0 && this.moveDirection.y !== 0) {
-            this.moveDirection.x *= 0.707;
-            this.moveDirection.y *= 0.707;
+            // If we're close enough to the target
+            if (distance < 5) {
+                this.walkTarget = null;
+                this.moving = false;
+                // Execute callback if there is one
+                if (this.walkCallback) {
+                    const callback = this.walkCallback;
+                    this.walkCallback = null;
+                    callback();
+                }
+            } else {
+                // Move towards target
+                this.moveDirection.x = dx / distance;
+                this.moveDirection.y = dy / distance;
+
+                // Update direction for animation
+                if (Math.abs(dx) > Math.abs(dy)) {
+                    this.direction = dx > 0 ? 'right' : 'left';
+                } else {
+                    this.direction = dy > 0 ? 'down' : 'up';
+                }
+            }
+        } else {
+            // Normal keyboard movement
+            if (input.keys['ArrowUp'] || input.keys['w']) {
+                this.moveDirection.y = -1;
+                this.direction = 'up';
+            }
+            if (input.keys['ArrowDown'] || input.keys['s']) {
+                this.moveDirection.y = 1;
+                this.direction = 'down';
+            }
+            if (input.keys['ArrowLeft'] || input.keys['a']) {
+                this.moveDirection.x = -1;
+                this.direction = 'left';
+            }
+            if (input.keys['ArrowRight'] || input.keys['d']) {
+                this.moveDirection.x = 1;
+                this.direction = 'right';
+            }
+
+            // Normalize diagonal movement
+            if (this.moveDirection.x !== 0 && this.moveDirection.y !== 0) {
+                this.moveDirection.x *= 0.707;
+                this.moveDirection.y *= 0.707;
+            }
         }
 
         // Move player
@@ -77,6 +110,11 @@ class Player extends Character {
         }
 
         this.moving = this.moveDirection.x !== 0 || this.moveDirection.y !== 0;
+    }
+
+    walkToTarget(x, y, callback) {
+        this.walkTarget = { x, y };
+        this.walkCallback = callback;
     }
 
     selectTool(tool) {

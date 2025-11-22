@@ -40,16 +40,18 @@ const CONFIG = {
 
     // Outfits
     OUTFITS: [
-        { id: 'farmer', name: 'Farmer Overalls', color: '#8B4513', unlocked: true },
-        { id: 'casual', name: 'Casual Dress', color: '#4169e1', unlocked: true },
-        { id: 'summer', name: 'Summer Sundress', color: '#FFD700', unlocked: true },
-        { id: 'spring', name: 'Spring Floral', color: '#FF69B4', unlocked: true },
-        { id: 'fancy', name: 'Elegant Gown', color: '#9370db', unlocked: true },
-        { id: 'winter', name: 'Cozy Sweater', color: '#B22222', unlocked: true },
-        { id: 'autumn', name: 'Autumn Outfit', color: '#D2691E', unlocked: true },
-        { id: 'party', name: 'Party Dress', color: '#FF1493', unlocked: true },
-        { id: 'sporty', name: 'Sporty Wear', color: '#00CED1', unlocked: true },
-        { id: 'traditional', name: 'Traditional', color: '#DC143C', unlocked: true }
+        { id: 'farmer', name: 'Farmer Overalls', color: '#8B4513', style: 'basic', unlocked: true },
+        { id: 'casual', name: 'Casual Dress', color: '#4169e1', style: 'basic', unlocked: true },
+        { id: 'summer', name: 'Summer Sundress', color: '#FFD700', style: 'basic', unlocked: true },
+        { id: 'spring', name: 'Spring Floral', color: '#FF69B4', style: 'basic', unlocked: true },
+        { id: 'fancy', name: 'Elegant Gown', color: '#9370db', style: 'basic', unlocked: true },
+        { id: 'winter', name: 'Cozy Sweater', color: '#B22222', style: 'basic', unlocked: true },
+        { id: 'autumn', name: 'Autumn Outfit', color: '#D2691E', style: 'basic', unlocked: true },
+        { id: 'party', name: 'Party Dress', color: '#FF1493', style: 'basic', unlocked: true },
+        { id: 'sporty', name: 'Sporty Wear', color: '#00CED1', style: 'basic', unlocked: true },
+        { id: 'traditional', name: 'Traditional', color: '#DC143C', style: 'basic', unlocked: true },
+        { id: 'tunic_cape', name: 'Tunic with Cape', color: '#8B6F47', style: 'tunic_cape', unlocked: true },
+        { id: 'crop_skirt', name: 'Crop Top & Skirt', color: '#E8D5C4', style: 'crop_skirt', unlocked: true }
     ],
 
     // Romance NPCs

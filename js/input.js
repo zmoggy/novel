@@ -59,10 +59,27 @@ class InputHandler {
             const tileY = Math.floor(worldY / CONFIG.TILE_SIZE);
 
             console.log(`Clicked at screen (${mouseX}, ${mouseY}), world (${worldX}, ${worldY}), tile (${tileX}, ${tileY})`);
-            console.log(`Current tool: ${this.game.player.currentTool}`);
 
-            // Use the current tool on the clicked tile
-            this.handleFarmingClick(tileX, tileY);
+            // Check if an NPC was clicked
+            const clickedNPC = this.game.npcs.find(npc => {
+                return worldX >= npc.x && worldX <= npc.x + npc.width &&
+                       worldY >= npc.y && worldY <= npc.y + npc.height;
+            });
+
+            if (clickedNPC) {
+                console.log(`Clicked on NPC: ${clickedNPC.npcName}`);
+                // Set player to walk to the NPC, then interact
+                this.game.player.walkToTarget(clickedNPC.x, clickedNPC.y, () => {
+                    clickedNPC.interact(this.game.player, this.game.dialogueSystem);
+                });
+                return;
+            }
+
+            // Otherwise, walk to the clicked position
+            this.game.player.walkToTarget(worldX, worldY, () => {
+                // Once at the position, use the current tool
+                this.handleFarmingClick(tileX, tileY);
+            });
         });
     }
 

@@ -23,7 +23,32 @@ class NPC extends Character {
     }
 
     generateAppearance() {
-        return {
+        // Assign specific appearances based on NPC ID for distinct looks
+        const appearances = {
+            'alex': {
+                skinTone: '#f4ccb0',
+                hairStyle: 'long',
+                hairColor: '#6c4830',
+                eyeColor: '#8B4513',
+                outfit: CONFIG.OUTFITS.find(o => o.id === 'tunic_cape')
+            },
+            'sam': {
+                skinTone: '#fce5cd',
+                hairStyle: 'long',
+                hairColor: '#ddb38b',
+                eyeColor: '#4169e1',
+                outfit: CONFIG.OUTFITS.find(o => o.id === 'crop_skirt')
+            },
+            'riley': {
+                skinTone: '#e8b692',
+                hairStyle: 'ponytail',
+                hairColor: '#b89778',
+                eyeColor: '#228B22',
+                outfit: CONFIG.OUTFITS.find(o => o.id === 'casual')
+            }
+        };
+
+        return appearances[this.id] || {
             skinTone: Utils.randomChoice(CONFIG.SKIN_TONES),
             hairStyle: Utils.randomChoice(CONFIG.HAIR_STYLES),
             hairColor: Utils.randomChoice(CONFIG.HAIR_COLORS),

@@ -101,35 +101,112 @@ class Renderer {
 
         // BODY - Female figure
         const outfitColor = customization.outfit?.color || '#8B4513';
+        const outfitStyle = customization.outfit?.style || 'basic';
+        const skinTone = customization.skinTone || '#fce5cd';
 
-        // Dress/outfit body
-        this.ctx.fillStyle = outfitColor;
-        this.ctx.beginPath();
-        this.ctx.moveTo(size * 0.3, size * 0.45);
-        this.ctx.lineTo(size * 0.7, size * 0.45);
-        this.ctx.lineTo(size * 0.8, size * 0.95);
-        this.ctx.lineTo(size * 0.2, size * 0.95);
-        this.ctx.closePath();
-        this.ctx.fill();
+        // Draw outfit based on style
+        if (outfitStyle === 'tunic_cape') {
+            // TUNIC WITH CAPE (brown tunic, blue/white cape)
+            // Cape first (behind body)
+            this.ctx.fillStyle = '#5C8FB5';
+            this.ctx.beginPath();
+            this.ctx.moveTo(size * 0.25, size * 0.45);
+            this.ctx.lineTo(size * 0.15, size * 0.9);
+            this.ctx.lineTo(size * 0.85, size * 0.9);
+            this.ctx.lineTo(size * 0.75, size * 0.45);
+            this.ctx.closePath();
+            this.ctx.fill();
 
-        // Dress shading
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
-        this.ctx.beginPath();
-        this.ctx.moveTo(size * 0.5, size * 0.45);
-        this.ctx.lineTo(size * 0.55, size * 0.95);
-        this.ctx.lineTo(size * 0.45, size * 0.95);
-        this.ctx.closePath();
-        this.ctx.fill();
+            // Cape highlights
+            this.ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+            this.ctx.beginPath();
+            this.ctx.moveTo(size * 0.3, size * 0.5);
+            this.ctx.lineTo(size * 0.25, size * 0.7);
+            this.ctx.lineTo(size * 0.35, size * 0.65);
+            this.ctx.closePath();
+            this.ctx.fill();
 
-        // Sleeves/Arms
-        this.ctx.fillStyle = outfitColor;
-        // Left arm
-        this.ctx.fillRect(size * 0.15, size * 0.45, size * 0.12, size * 0.35);
-        // Right arm
-        this.ctx.fillRect(size * 0.73, size * 0.45, size * 0.12, size * 0.35);
+            // Tunic body
+            this.ctx.fillStyle = '#8B6F47';
+            this.ctx.beginPath();
+            this.ctx.moveTo(size * 0.35, size * 0.45);
+            this.ctx.lineTo(size * 0.65, size * 0.45);
+            this.ctx.lineTo(size * 0.68, size * 0.75);
+            this.ctx.lineTo(size * 0.32, size * 0.75);
+            this.ctx.closePath();
+            this.ctx.fill();
+
+            // Belt
+            this.ctx.fillStyle = '#654321';
+            this.ctx.fillRect(size * 0.32, size * 0.6, size * 0.36, size * 0.06);
+
+            // Arms
+            this.ctx.fillStyle = '#8B6F47';
+            this.ctx.fillRect(size * 0.2, size * 0.45, size * 0.12, size * 0.25);
+            this.ctx.fillRect(size * 0.68, size * 0.45, size * 0.12, size * 0.25);
+
+        } else if (outfitStyle === 'crop_skirt') {
+            // CROP TOP & SKIRT (beige crop top, blue/pink skirt)
+            // Skirt (two-toned)
+            this.ctx.fillStyle = '#6B9BD1';
+            this.ctx.beginPath();
+            this.ctx.moveTo(size * 0.35, size * 0.6);
+            this.ctx.lineTo(size * 0.65, size * 0.6);
+            this.ctx.lineTo(size * 0.75, size * 0.95);
+            this.ctx.lineTo(size * 0.25, size * 0.95);
+            this.ctx.closePath();
+            this.ctx.fill();
+
+            // Skirt second color
+            this.ctx.fillStyle = '#C294B8';
+            this.ctx.beginPath();
+            this.ctx.moveTo(size * 0.5, size * 0.6);
+            this.ctx.lineTo(size * 0.65, size * 0.6);
+            this.ctx.lineTo(size * 0.75, size * 0.95);
+            this.ctx.lineTo(size * 0.5, size * 0.95);
+            this.ctx.closePath();
+            this.ctx.fill();
+
+            // Crop top
+            this.ctx.fillStyle = '#E8D5C4';
+            this.ctx.fillRect(size * 0.35, size * 0.45, size * 0.3, size * 0.15);
+
+            // Top trim
+            this.ctx.fillStyle = '#D4C1B0';
+            this.ctx.fillRect(size * 0.35, size * 0.45, size * 0.3, size * 0.03);
+
+            // Arms (bare)
+            this.ctx.fillStyle = skinTone;
+            this.ctx.fillRect(size * 0.2, size * 0.45, size * 0.12, size * 0.3);
+            this.ctx.fillRect(size * 0.68, size * 0.45, size * 0.12, size * 0.3);
+
+        } else {
+            // BASIC DRESS (default)
+            this.ctx.fillStyle = outfitColor;
+            this.ctx.beginPath();
+            this.ctx.moveTo(size * 0.3, size * 0.45);
+            this.ctx.lineTo(size * 0.7, size * 0.45);
+            this.ctx.lineTo(size * 0.8, size * 0.95);
+            this.ctx.lineTo(size * 0.2, size * 0.95);
+            this.ctx.closePath();
+            this.ctx.fill();
+
+            // Dress shading
+            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+            this.ctx.beginPath();
+            this.ctx.moveTo(size * 0.5, size * 0.45);
+            this.ctx.lineTo(size * 0.55, size * 0.95);
+            this.ctx.lineTo(size * 0.45, size * 0.95);
+            this.ctx.closePath();
+            this.ctx.fill();
+
+            // Sleeves/Arms
+            this.ctx.fillStyle = outfitColor;
+            this.ctx.fillRect(size * 0.15, size * 0.45, size * 0.12, size * 0.35);
+            this.ctx.fillRect(size * 0.73, size * 0.45, size * 0.12, size * 0.35);
+        }
 
         // Hands
-        const skinTone = customization.skinTone || '#fce5cd';
         this.ctx.fillStyle = skinTone;
         this.ctx.beginPath();
         this.ctx.arc(size * 0.21, size * 0.82, size * 0.08, 0, Math.PI * 2);
