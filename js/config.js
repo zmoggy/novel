@@ -189,7 +189,7 @@ const CONFIG = {
                 "You don't look at me with fear. Most do. You're different.",
                 "Before the Lance of Fury fell into madness, they served as guardians. Power must have purpose.",
                 "I left Kremnos for various reasons. Being here with you... it's not one I regret."
-            },
+            ],
             schedule: {
                 morning: { x: 35, y: 8 },
                 afternoon: { x: 30, y: 20 },
