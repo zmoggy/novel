@@ -38,10 +38,11 @@ Welcome to Forest Farm! A charming browser-based farming game where you can grow
   - Proper proportions and shading
 
 ### 💕 Romance Options - Honkai Star Rail Characters!
-Meet and romance 3 unique NPCs from Honkai Star Rail:
+Meet and romance 4 unique NPCs from Honkai Star Rail:
 - **Phainon** - Heroic and warmhearted knight with white hair and blue eyes
 - **Mydei** - Intense and passionate warrior with blonde hair and amber eyes
 - **Dan Heng** - Calm and composed guardian with dark hair, cyan eyes, and dragon horns
+- **Aurelia** - Elegant and graceful noble with golden hair and brown eyes
 
 **New Features:**
 - NPCs have **name tags** floating above them
@@ -50,6 +51,16 @@ Meet and romance 3 unique NPCs from Honkai Star Rail:
 - NPCs have daily schedules and move around the map
 - They have their own houses (labeled)
 - Hearts appear when they're helping you!
+- **Visual Novel-Style Dialogue**: Beautiful character portraits display when talking to NPCs
+
+#### 🎨 Character Portraits
+The game now supports custom character portrait images for a visual novel-style experience!
+- Place character portrait images in `images/characters/` folder
+- Supported formats: PNG (recommended) or JPG
+- Required filenames: `phainon.png`, `mydei.png`, `danheng.png`, `aurelia.png`
+- Recommended size: 300x400 pixels or larger
+- Portraits will automatically display in the dialogue box
+- Falls back to drawn sprites if images are not found
 
 ### 🐕 Border Collie Companion
 You have a loyal border collie with heterochromia (one brown eye, one blue eye) who follows you around the farm and occasionally plays when you're standing still.
@@ -155,6 +166,13 @@ novel/
 ├── index.html          # Main HTML file
 ├── styles/
 │   └── main.css       # Game styling
+├── images/
+│   └── characters/    # Character portrait images
+│       ├── README.txt # Instructions for adding character images
+│       ├── phainon.png    # (Add your image here)
+│       ├── mydei.png      # (Add your image here)
+│       ├── danheng.png    # (Add your image here)
+│       └── aurelia.png    # (Add your image here)
 └── js/
     ├── config.js      # Game configuration
     ├── utils.js       # Utility functions

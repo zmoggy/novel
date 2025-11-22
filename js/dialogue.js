@@ -56,6 +56,28 @@ class DialogueSystem {
         // Clear previous portrait
         this.portraitDiv.innerHTML = '';
 
+        // If NPC has a portrait image, use it
+        if (npc.portraitImage) {
+            const img = document.createElement('img');
+            img.src = npc.portraitImage;
+            img.alt = npc.name;
+            img.className = 'character-portrait';
+            img.onerror = () => {
+                // Fallback to drawn sprite if image fails to load
+                console.log(`Failed to load portrait for ${npc.name}, using sprite fallback`);
+                this.drawSpritePortrait(npc);
+            };
+            this.portraitDiv.appendChild(img);
+        } else {
+            // Fallback to drawn sprite
+            this.drawSpritePortrait(npc);
+        }
+    }
+
+    drawSpritePortrait(npc) {
+        // Clear previous portrait
+        this.portraitDiv.innerHTML = '';
+
         // Create canvas for portrait
         const canvas = document.createElement('canvas');
         canvas.width = 150;

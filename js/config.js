@@ -138,6 +138,7 @@ const CONFIG = {
             id: 'phainon',
             name: 'Phainon',
             personality: 'heroic and warmhearted',
+            portraitImage: 'images/characters/phainon.png',
             appearance: {
                 hairColor: '#E6F2FF', // Silver/white
                 hairStyle: 'spiky',
@@ -169,6 +170,7 @@ const CONFIG = {
             id: 'mydei',
             name: 'Mydei',
             personality: 'intense and passionate',
+            portraitImage: 'images/characters/mydei.png',
             appearance: {
                 hairColor: '#FFD89A', // Golden blonde
                 hairStyle: 'messy',
@@ -200,6 +202,7 @@ const CONFIG = {
             id: 'danheng',
             name: 'Dan Heng',
             personality: 'calm and composed',
+            portraitImage: 'images/characters/danheng.png',
             appearance: {
                 hairColor: '#2F1F1F', // Dark brown/black
                 hairStyle: 'long',
@@ -226,6 +229,38 @@ const CONFIG = {
                 morning: { x: 18, y: 25 },
                 afternoon: { x: 12, y: 28 },
                 evening: { x: 22, y: 30 }
+            }
+        },
+        {
+            id: 'aurelia',
+            name: 'Aurelia',
+            personality: 'elegant and graceful',
+            portraitImage: 'images/characters/aurelia.png',
+            appearance: {
+                hairColor: '#FFD700', // Golden blonde
+                hairStyle: 'long',
+                eyeColor: '#8B4513', // Brown
+                outfitColors: {
+                    primary: '#DC143C', // Crimson red
+                    secondary: '#FFD700', // Gold
+                    accent: '#8B0000' // Dark red
+                }
+            },
+            favoriteGifts: ['flowers', 'jewelry', 'fine wine'],
+            dialogues: [
+                "Good day to you. The weather is quite pleasant, wouldn't you say?",
+                "Your dedication to this farm is admirable. True nobility comes from one's actions, not their birth.",
+                "I may come from a distinguished family, but I find the simple life here... refreshing.",
+                "These flowers you've grown are exquisite. They rival even the royal gardens.",
+                "Would you care to join me for tea? I've been meaning to discuss something with you.",
+                "In my world, everything was decided for me. Here, I can finally choose my own path.",
+                "You treat me as an equal, not as nobility. That means more to me than you know.",
+                "I've traveled far from my homeland, but with you... I feel I've found where I belong."
+            ],
+            schedule: {
+                morning: { x: 25, y: 18 },
+                afternoon: { x: 28, y: 22 },
+                evening: { x: 20, y: 25 }
             }
         }
     ],
