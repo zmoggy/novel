@@ -141,11 +141,11 @@ const CONFIG = {
             appearance: {
                 hairColor: '#E6F2FF', // Silver/white
                 hairStyle: 'spiky',
-                eyeColor: '#8B4513', // Brown
+                eyeColor: '#4169e1', // Blue
                 outfitColors: {
-                    primary: '#DC143C', // Crimson red
-                    secondary: '#FFD700', // Gold
-                    accent: '#8B0000' // Dark red
+                    primary: '#B0C4DE', // Light blue/steel
+                    secondary: '#4682B4', // Steel blue
+                    accent: '#FFD700' // Gold
                 }
             },
             favoriteGifts: ['flowers', 'minerals', 'fruits'],
@@ -170,15 +170,14 @@ const CONFIG = {
             name: 'Mydei',
             personality: 'intense and passionate',
             appearance: {
-                hairColor: '#2F1F1F', // Dark brown/black
+                hairColor: '#FFD89A', // Golden blonde
                 hairStyle: 'messy',
-                eyeColor: '#FF6B6B', // Red
+                eyeColor: '#D2691E', // Amber
                 outfitColors: {
-                    primary: '#4A4A4A', // Dark gray
-                    secondary: '#00CED1', // Cyan/turquoise
-                    accent: '#FFD700' // Gold
-                },
-                hasHorns: true
+                    primary: '#DC143C', // Crimson red
+                    secondary: '#FFD700', // Gold
+                    accent: '#8B0000' // Dark red
+                }
             },
             favoriteGifts: ['minerals', 'fish', 'rare items'],
             dialogues: [
@@ -202,13 +201,13 @@ const CONFIG = {
             name: 'Dan Heng',
             personality: 'calm and composed',
             appearance: {
-                hairColor: '#FFD89A', // Golden blonde
+                hairColor: '#2F1F1F', // Dark brown/black
                 hairStyle: 'long',
                 eyeColor: '#00CED1', // Cyan
                 hasHorns: true,
                 outfitColors: {
-                    primary: '#B0C4DE', // Light blue/steel
-                    secondary: '#4682B4', // Steel blue
+                    primary: '#4A4A4A', // Dark gray
+                    secondary: '#00CED1', // Cyan/turquoise
                     accent: '#FFD700' // Gold
                 }
             },
