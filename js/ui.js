@@ -21,6 +21,36 @@ class UI {
 
     setupHUD() {
         // HUD updates will be called from game loop
+        this.setupAudioControls();
+    }
+
+    setupAudioControls() {
+        const musicToggle = document.getElementById('musicToggle');
+        const sfxToggle = document.getElementById('sfxToggle');
+
+        if (musicToggle) {
+            musicToggle.addEventListener('click', () => {
+                const isMuted = this.game.audioManager.toggleMusicMute();
+                musicToggle.classList.toggle('muted', isMuted);
+            });
+
+            // Set initial state
+            if (this.game.audioManager.isMusicMuted) {
+                musicToggle.classList.add('muted');
+            }
+        }
+
+        if (sfxToggle) {
+            sfxToggle.addEventListener('click', () => {
+                const isMuted = this.game.audioManager.toggleSfxMute();
+                sfxToggle.classList.toggle('muted', isMuted);
+            });
+
+            // Set initial state
+            if (this.game.audioManager.isSfxMuted) {
+                sfxToggle.classList.add('muted');
+            }
+        }
     }
 
     setupRelationshipPanel() {

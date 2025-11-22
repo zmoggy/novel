@@ -12,6 +12,7 @@ class Game {
         this.npcs = [];
         this.characterCreation = new CharacterCreation();
         this.dialogueSystem = new DialogueSystem();
+        this.audioManager = new AudioManager();
         this.ui = null;
         this.input = null;
         this.wardrobe = null;
@@ -82,6 +83,10 @@ class Game {
 
         // Set renderer for dialogue system (for portraits)
         this.dialogueSystem.setRenderer(this.renderer);
+
+        // Start background music
+        this.audioManager.enableAudio();
+        this.audioManager.playMusic('main');
 
         // Change state to playing
         this.state = 'playing';

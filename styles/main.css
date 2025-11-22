@@ -281,6 +281,52 @@ body {
     transform: translateX(-5px);
 }
 
+/* Audio Controls */
+#audio-controls {
+    position: absolute;
+    right: 20px;
+    top: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.audio-btn {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(99, 102, 241, 0.9));
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 1), rgba(99, 102, 241, 1));
+}
+
+.audio-btn:active {
+    transform: scale(0.95);
+}
+
+.audio-btn.muted {
+    background: linear-gradient(135deg, rgba(107, 114, 128, 0.9), rgba(75, 85, 99, 0.9));
+    opacity: 0.6;
+}
+
+.audio-btn.muted::after {
+    content: '🔇';
+    position: absolute;
+    font-size: 1.2em;
+}
+
 /* Relationship Panel */
 #relationship-panel {
     position: absolute;

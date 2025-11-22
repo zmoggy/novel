@@ -121,7 +121,7 @@ class Player extends Character {
         this.destination = { x, y };
     }
 
-    useTool(world) {
+    useTool(world, audioManager = null) {
         if (this.energy <= 0) {
             return { success: false, message: 'Not enough energy!' };
         }
@@ -132,19 +132,19 @@ class Player extends Character {
 
         switch(this.currentTool) {
             case 'hoe':
-                return this.tillSoil(world, tile.x, tile.y);
+                return this.tillSoil(world, tile.x, tile.y, audioManager);
             case 'seeds':
-                return this.plantSeed(world, tile.x, tile.y);
+                return this.plantSeed(world, tile.x, tile.y, audioManager);
             case 'wateringCan':
-                return this.waterCrop(world, tile.x, tile.y);
+                return this.waterCrop(world, tile.x, tile.y, audioManager);
             case 'hand':
-                return this.harvestCrop(world, tile.x, tile.y);
+                return this.harvestCrop(world, tile.x, tile.y, audioManager);
             default:
                 return { success: false };
         }
     }
 
-    tillSoil(world, tileX, tileY) {
+    tillSoil(world, tileX, tileY, audioManager) {
         console.log(`Attempting to till soil at (${tileX}, ${tileY})`);
         const result = world.tillSoil(tileX, tileY);
         console.log(`Till result: ${result}`);
@@ -152,12 +152,13 @@ class Player extends Character {
             this.energy -= 2;
             this.currentAction = 'hoeing';
             this.actionTimer = 500;
+            if (audioManager) audioManager.playSound('plant');
             return { success: true, message: 'Soil tilled!' };
         }
         return { success: false, message: 'Cannot till here!' };
     }
 
-    plantSeed(world, tileX, tileY) {
+    plantSeed(world, tileX, tileY, audioManager) {
         // For now, plant tomato seeds
         const seedType = 'tomato';
         if (!this.inventory.seeds[seedType] || this.inventory.seeds[seedType] <= 0) {
@@ -170,29 +171,32 @@ class Player extends Character {
             this.energy -= 2;
             this.currentAction = 'planting';
             this.actionTimer = 500;
+            if (audioManager) audioManager.playSound('plant');
             return { success: true, message: 'Seed planted!' };
         }
         return { success: false, message: 'Cannot plant here!' };
     }
 
-    waterCrop(world, tileX, tileY) {
+    waterCrop(world, tileX, tileY, audioManager) {
         const result = world.waterCrop(tileX, tileY);
         if (result) {
             this.energy -= 1;
             this.currentAction = 'watering';
             this.actionTimer = 500;
+            if (audioManager) audioManager.playSound('water');
             return { success: true, message: 'Crop watered!' };
         }
         return { success: false, message: 'Nothing to water!' };
     }
 
-    harvestCrop(world, tileX, tileY) {
+    harvestCrop(world, tileX, tileY, audioManager) {
         const crop = world.harvestCrop(tileX, tileY);
         if (crop) {
             this.energy -= 2;
             this.addCropToInventory(crop);
             this.currentAction = 'harvesting';
             this.actionTimer = 500;
+            if (audioManager) audioManager.playSound('harvest');
 
             // Sell automatically for now
             const cropData = CONFIG.CROPS.find(c => c.id === crop);

@@ -131,7 +131,7 @@ class InputHandler {
         }
 
         // Use current tool
-        const result = this.game.player.useTool(this.game.world);
+        const result = this.game.player.useTool(this.game.world, this.game.audioManager);
         if (result.message) {
             this.game.ui.showMessage(result.message);
         }
