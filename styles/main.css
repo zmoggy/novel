@@ -126,8 +126,7 @@ body {
     flex-wrap: wrap;
 }
 
-.color-option,
-.style-option {
+.color-option {
     width: 50px;
     height: 50px;
     border: 3px solid #ddd;
@@ -137,13 +136,20 @@ body {
 }
 
 .style-option {
+    min-width: 80px;
+    height: 40px;
+    padding: 8px 15px;
+    border: 3px solid #ddd;
     border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 0.8em;
+    font-size: 0.85em;
     color: #666;
     font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
 }
 
 .color-option:hover,
