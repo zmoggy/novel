@@ -2,7 +2,8 @@
 class DialogueSystem {
     constructor() {
         this.box = document.getElementById('dialogue-box');
-        this.portraitDiv = this.box.querySelector('.dialogue-portrait');
+        this.playerPortraitDiv = this.box.querySelector('.dialogue-portrait-left');
+        this.npcPortraitDiv = this.box.querySelector('.dialogue-portrait-right');
         this.nameDiv = this.box.querySelector('.dialogue-name');
         this.textDiv = this.box.querySelector('.dialogue-text');
         this.optionsDiv = this.box.querySelector('.dialogue-options');
@@ -23,8 +24,11 @@ class DialogueSystem {
         this.nameDiv.textContent = npcName;
         this.textDiv.textContent = text;
 
-        // Draw NPC portrait
-        this.drawPortrait(npc);
+        // Draw player portrait on left
+        this.drawPlayerPortrait();
+
+        // Draw NPC portrait on right
+        this.drawNPCPortrait(npc);
 
         // Clear and set options
         this.optionsDiv.innerHTML = '';
@@ -52,9 +56,27 @@ class DialogueSystem {
         }
     }
 
-    drawPortrait(npc) {
+    drawPlayerPortrait() {
         // Clear previous portrait
-        this.portraitDiv.innerHTML = '';
+        this.playerPortraitDiv.innerHTML = '';
+
+        // Load player portrait from config
+        const playerConfig = CONFIG.PLAYER_CHARACTER;
+        const img = document.createElement('img');
+        img.src = playerConfig.portraitImage;
+        img.alt = 'You';
+        img.className = 'character-portrait';
+        img.onerror = () => {
+            // Show a placeholder if image fails to load
+            console.log('Failed to load player portrait, showing placeholder');
+            this.playerPortraitDiv.innerHTML = '<div style="color: #666; text-align: center; font-size: 0.9em;">Your<br>Portrait</div>';
+        };
+        this.playerPortraitDiv.appendChild(img);
+    }
+
+    drawNPCPortrait(npc) {
+        // Clear previous portrait
+        this.npcPortraitDiv.innerHTML = '';
 
         // If NPC has a portrait image, use it
         if (npc.portraitImage) {
@@ -65,18 +87,18 @@ class DialogueSystem {
             img.onerror = () => {
                 // Fallback to drawn sprite if image fails to load
                 console.log(`Failed to load portrait for ${npc.name}, using sprite fallback`);
-                this.drawSpritePortrait(npc);
+                this.drawSpritePortrait(npc, this.npcPortraitDiv);
             };
-            this.portraitDiv.appendChild(img);
+            this.npcPortraitDiv.appendChild(img);
         } else {
             // Fallback to drawn sprite
-            this.drawSpritePortrait(npc);
+            this.drawSpritePortrait(npc, this.npcPortraitDiv);
         }
     }
 
-    drawSpritePortrait(npc) {
+    drawSpritePortrait(npc, portraitDiv) {
         // Clear previous portrait
-        this.portraitDiv.innerHTML = '';
+        portraitDiv.innerHTML = '';
 
         // Create canvas for portrait
         const canvas = document.createElement('canvas');
@@ -111,7 +133,7 @@ class DialogueSystem {
         }
 
         // Add canvas to portrait div
-        this.portraitDiv.appendChild(canvas);
+        portraitDiv.appendChild(canvas);
     }
 
     renderCharacterSprite(ctx, customization, size) {
