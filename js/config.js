@@ -284,47 +284,47 @@ const CONFIG = {
             },
             favoriteGifts: ['books', 'flowers', 'tea'],
             dialogues: {
-                // 0-40 hearts: Polite but distant
+                // 0-40 hearts: Polite but distant, duty-focused
                 0: [
                     "You wish to greet me? Go ahead. Though I think our usual way is just fine.",
                     "Though you may have many questions, allow me to introduce myself first. I am your companion, Dan Heng.",
                     "The farm is fraught with dangers. We must consider every possible method to ensure safety.",
                     "All living beings have their own ways of communication. Your dedication to the crops speaks volumes."
                 ],
-                // 41-80 hearts: Protective, shows care
+                // 41-80 hearts: Protective guardian, shows care
                 41: [
                     "I'll keep watch tonight. Get some rest. We'll need our strength for tomorrow.",
                     "The Permanence shields all life. Your farm carries the same tranquility.",
                     "Whatever records we gather here will help create a complete understanding of this place.",
-                    "Your efforts here are commendable. I find myself looking forward to our conversations."
+                    "Do not worry. I will ensure your safety. This is my duty as a guardian."
                 ],
-                // 81-120 hearts: Opens up about past, trusts you
+                // 81-120 hearts: Opens up about past, finds belonging
                 81: [
                     "At first, I had nowhere to call home. But before I knew it... every stop here became a new beginning for me.",
                     "I've spent much of my life running from the past. But with you, I feel... grounded.",
-                    "The archives hold many secrets, but the peace I find in your presence cannot be recorded in any book.",
+                    "When the heart changes, so does the world it sees. You've changed how I see this place.",
                     "You've shown me kindness without expecting anything in return. That's... rare."
                 ],
-                // 121-160 hearts: Romantic feelings emerge
+                // 121-160 hearts: Romantic feelings, treasures what endures
                 121: [
                     "I usually prefer solitude, but your company has become something I actively seek out.",
-                    "In all my travels, I've never met anyone quite like you. You make me want to stay.",
                     "The Permanence teaches us to treasure what endures. And what I feel for you... it endures.",
+                    "My strength is not what it was... it's more. You've given me a reason to become stronger.",
                     "I'm not skilled with words of affection, but know that you've become precious to me."
                 ],
-                // 161-200 hearts: Deep love, commitment
+                // 161-200 hearts: Deep commitment, protective devotion
                 161: [
                     "I've always kept my distance from others. But with you, I find myself wanting to be closer.",
                     "You are my sanctuary. In this world of chaos, you bring me peace.",
-                    "I would face my past a thousand times if it meant finding my way to you.",
+                    "My purpose has always been to protect. But now, protecting you feels like protecting my very heart.",
                     "The dragon's heart beats only for you. This is my truth."
                 ],
-                // 201+ hearts: Eternal devotion
+                // 201+ hearts: Eternal vow, home and permanence
                 201: [
                     "I love you. These words don't come easily, but they are spoken with absolute certainty.",
                     "Every record I keep, every memory I preserve... they all lead back to you.",
                     "You are my home now. Wherever you are, that's where I belong.",
-                    "The Permanence will witness my vow: I will stand by your side for eternity."
+                    "The Permanence will witness my vow: I will stand by your side for eternity. I'll always protect you."
                 ]
             },
             schedule: {
