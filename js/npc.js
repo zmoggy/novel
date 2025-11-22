@@ -36,7 +36,7 @@ class NPC extends Character {
         };
     }
 
-    update(deltaTime, gameTime, player) {
+    update(deltaTime, gameTime, player, world) {
         // Update schedule position based on time
         const timeOfDay = this.getTimeOfDay(gameTime.hours);
         const schedulePos = this.schedule[timeOfDay];
@@ -46,15 +46,37 @@ class NPC extends Character {
             this.targetY = schedulePos.y * CONFIG.TILE_SIZE;
         }
 
-        // Move towards target
+        // Move towards target with collision detection
         const dx = this.targetX - this.x;
         const dy = this.targetY - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance > 5) {
-            this.x += (dx / distance) * this.walkSpeed;
-            this.y += (dy / distance) * this.walkSpeed;
-            this.moving = true;
+            const moveX = (dx / distance) * this.walkSpeed;
+            const moveY = (dy / distance) * this.walkSpeed;
+
+            // Check if new position is walkable
+            const newX = this.x + moveX;
+            const newY = this.y + moveY;
+
+            if (world && world.isWalkable(newX, newY)) {
+                this.x = newX;
+                this.y = newY;
+                this.moving = true;
+            } else {
+                // Try moving only in X direction
+                if (world && world.isWalkable(newX, this.y)) {
+                    this.x = newX;
+                    this.moving = true;
+                }
+                // Try moving only in Y direction
+                else if (world && world.isWalkable(this.x, newY)) {
+                    this.y = newY;
+                    this.moving = true;
+                } else {
+                    this.moving = false;
+                }
+            }
         } else {
             this.moving = false;
         }

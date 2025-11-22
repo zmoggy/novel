@@ -9,6 +9,8 @@ class World {
         this.riverPath = [];
         this.houses = [];
         this.trees = [];
+        this.flowers = [];
+        this.rocks = [];
         this.npcs = []; // NPCs reference for UI
 
         this.generateWorld();
@@ -52,26 +54,20 @@ class World {
 
         // Create paths and bridge
         const bridgeY = farmY + Math.floor(farmH / 2); // Middle of farm
-        const bridgeWidth = 4; // 4 tiles wide bridge
 
-        // Path from farm to river
-        for (let y = bridgeY - 1; y <= bridgeY + 2; y++) {
-            this.createPath(farmX + farmW, y, riverX - 1, y);
-        }
+        // Path from farm to river (2 tiles wide)
+        this.createPath(farmX + farmW, bridgeY, riverX - 1, bridgeY);
+        this.createPath(farmX + farmW, bridgeY + 1, riverX - 1, bridgeY + 1);
 
-        // Wide bridge across river (4 tiles wide, spanning the river)
-        for (let y = bridgeY - 1; y <= bridgeY + 2; y++) {
-            for (let x = riverX; x < riverX + 2; x++) {
-                if (this.isValidTile(x, y)) {
-                    this.tiles[y][x] = { type: 'bridge', walkable: true };
-                }
-            }
-        }
+        // Bridge across river (2x2 tiles)
+        this.tiles[bridgeY][riverX] = { type: 'bridge', walkable: true };
+        this.tiles[bridgeY][riverX + 1] = { type: 'bridge', walkable: true };
+        this.tiles[bridgeY + 1][riverX] = { type: 'bridge', walkable: true };
+        this.tiles[bridgeY + 1][riverX + 1] = { type: 'bridge', walkable: true };
 
-        // Path from bridge to far side (to x=19, the far edge) - wider path
-        for (let y = bridgeY - 1; y <= bridgeY + 2; y++) {
-            this.createPath(riverX + 2, y, this.width - 1, y);
-        }
+        // Path from bridge to far side (2 tiles wide)
+        this.createPath(riverX + 2, bridgeY, this.width - 1, bridgeY);
+        this.createPath(riverX + 2, bridgeY + 1, this.width - 1, bridgeY + 1);
 
         // Add player's house
         this.houses.push({
@@ -117,6 +113,33 @@ class World {
             if (this.tiles[y][x].type === 'forest') {
                 this.trees.push({ x, y });
                 this.tiles[y][x].walkable = false;
+            }
+        }
+
+        // Add flowers scattered in forest and grass areas
+        for (let i = 0; i < 80; i++) {
+            const x = Utils.randomInt(0, this.width - 1);
+            const y = Utils.randomInt(0, this.height - 1);
+            const tile = this.tiles[y][x];
+
+            if ((tile.type === 'forest' || tile.type === 'grass') && tile.walkable) {
+                const types = ['red', 'yellow', 'purple', 'white', 'pink'];
+                this.flowers.push({
+                    x,
+                    y,
+                    type: types[Utils.randomInt(0, types.length - 1)]
+                });
+            }
+        }
+
+        // Add decorative rocks
+        for (let i = 0; i < 30; i++) {
+            const x = Utils.randomInt(0, this.width - 1);
+            const y = Utils.randomInt(0, this.height - 1);
+            const tile = this.tiles[y][x];
+
+            if (tile.type === 'forest' && tile.walkable) {
+                this.rocks.push({ x, y });
             }
         }
     }
@@ -269,33 +292,15 @@ class World {
             }
         }
 
-        // Draw farm area border
-        const farmPixelX = this.farmArea.x * CONFIG.TILE_SIZE;
-        const farmPixelY = this.farmArea.y * CONFIG.TILE_SIZE;
-        const farmPixelW = this.farmArea.width * CONFIG.TILE_SIZE;
-        const farmPixelH = this.farmArea.height * CONFIG.TILE_SIZE;
+        // Draw flowers (underneath everything)
+        this.flowers.forEach(flower => {
+            renderer.drawFlower(flower.x * CONFIG.TILE_SIZE, flower.y * CONFIG.TILE_SIZE, flower.type);
+        });
 
-        renderer.ctx.save();
-        renderer.ctx.strokeStyle = '#FFD700';
-        renderer.ctx.lineWidth = 3;
-        renderer.ctx.setLineDash([10, 5]);
-        renderer.ctx.strokeRect(
-            farmPixelX - renderer.camera.x,
-            farmPixelY - renderer.camera.y,
-            farmPixelW,
-            farmPixelH
-        );
-        renderer.ctx.restore();
-
-        // Draw "FARM AREA" label
-        renderer.drawText(
-            'FARM AREA',
-            farmPixelX + farmPixelW / 2,
-            farmPixelY - 5,
-            '#FFD700',
-            16,
-            'center'
-        );
+        // Draw rocks
+        this.rocks.forEach(rock => {
+            renderer.drawRock(rock.x * CONFIG.TILE_SIZE, rock.y * CONFIG.TILE_SIZE);
+        });
 
         // Draw trees
         this.trees.forEach(tree => {

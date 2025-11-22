@@ -842,39 +842,107 @@ class Renderer {
         const screenY = y - this.camera.y;
         const size = CONFIG.TILE_SIZE * 0.8;
 
-        // Body (black and white)
-        this.ctx.fillStyle = '#000000';
-        this.ctx.fillRect(screenX, screenY + size * 0.3, size, size * 0.5);
-
-        // White patches
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillRect(screenX + size * 0.2, screenY + size * 0.4, size * 0.6, size * 0.3);
-
-        // Head
-        this.ctx.fillStyle = '#000000';
+        // Shadow
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
         this.ctx.beginPath();
-        this.ctx.arc(screenX + size / 2, screenY + size * 0.25, size * 0.3, 0, Math.PI * 2);
+        this.ctx.ellipse(screenX + size / 2, screenY + size * 0.9, size * 0.4, size * 0.1, 0, 0, Math.PI * 2);
         this.ctx.fill();
 
-        // White snout
-        this.ctx.fillStyle = '#FFFFFF';
+        // Body (rounded Border Collie body)
+        this.ctx.fillStyle = '#1a1a1a';
         this.ctx.beginPath();
-        this.ctx.arc(screenX + size / 2, screenY + size * 0.3, size * 0.15, 0, Math.PI * 2);
+        this.ctx.ellipse(screenX + size / 2, screenY + size * 0.55, size * 0.35, size * 0.3, 0, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // White chest patch
+        this.ctx.fillStyle = '#f5f5f5';
+        this.ctx.beginPath();
+        this.ctx.ellipse(screenX + size / 2, screenY + size * 0.6, size * 0.25, size * 0.22, 0, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Legs
+        this.ctx.fillStyle = '#1a1a1a';
+        // Front legs
+        this.ctx.fillRect(screenX + size * 0.35, screenY + size * 0.7, size * 0.08, size * 0.2);
+        this.ctx.fillRect(screenX + size * 0.57, screenY + size * 0.7, size * 0.08, size * 0.2);
+        // Back legs
+        this.ctx.fillRect(screenX + size * 0.25, screenY + size * 0.68, size * 0.08, size * 0.2);
+        this.ctx.fillRect(screenX + size * 0.67, screenY + size * 0.68, size * 0.08, size * 0.2);
+
+        // Tail (fluffy)
+        this.ctx.fillStyle = '#1a1a1a';
+        this.ctx.beginPath();
+        this.ctx.arc(screenX + size * 0.15, screenY + size * 0.45, size * 0.15, 0, Math.PI * 2);
+        this.ctx.fill();
+        // White tip
+        this.ctx.fillStyle = '#f5f5f5';
+        this.ctx.beginPath();
+        this.ctx.arc(screenX + size * 0.12, screenY + size * 0.42, size * 0.08, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Head
+        this.ctx.fillStyle = '#1a1a1a';
+        this.ctx.beginPath();
+        this.ctx.arc(screenX + size / 2, screenY + size * 0.3, size * 0.28, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // White face markings (Border Collie style)
+        this.ctx.fillStyle = '#f5f5f5';
+        this.ctx.beginPath();
+        this.ctx.arc(screenX + size * 0.5, screenY + size * 0.35, size * 0.18, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Ears (floppy)
+        this.ctx.fillStyle = '#1a1a1a';
+        this.ctx.beginPath();
+        this.ctx.ellipse(screenX + size * 0.25, screenY + size * 0.22, size * 0.12, size * 0.18, -0.3, 0, Math.PI * 2);
+        this.ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.ellipse(screenX + size * 0.75, screenY + size * 0.22, size * 0.12, size * 0.18, 0.3, 0, Math.PI * 2);
         this.ctx.fill();
 
         // Eyes (heterochromia - brown and blue)
         // Brown eye
         this.ctx.fillStyle = '#8B4513';
-        this.ctx.fillRect(screenX + size * 0.35, screenY + size * 0.2, size * 0.08, size * 0.08);
+        this.ctx.beginPath();
+        this.ctx.arc(screenX + size * 0.4, screenY + size * 0.28, size * 0.06, 0, Math.PI * 2);
+        this.ctx.fill();
 
         // Blue eye
         this.ctx.fillStyle = '#4169e1';
-        this.ctx.fillRect(screenX + size * 0.57, screenY + size * 0.2, size * 0.08, size * 0.08);
+        this.ctx.beginPath();
+        this.ctx.arc(screenX + size * 0.6, screenY + size * 0.28, size * 0.06, 0, Math.PI * 2);
+        this.ctx.fill();
 
-        // Ears
-        this.ctx.fillStyle = '#000000';
-        this.ctx.fillRect(screenX + size * 0.1, screenY + size * 0.1, size * 0.15, size * 0.3);
-        this.ctx.fillRect(screenX + size * 0.75, screenY + size * 0.1, size * 0.15, size * 0.3);
+        // Pupils
+        this.ctx.fillStyle = '#000';
+        this.ctx.beginPath();
+        this.ctx.arc(screenX + size * 0.4, screenY + size * 0.28, size * 0.03, 0, Math.PI * 2);
+        this.ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.arc(screenX + size * 0.6, screenY + size * 0.28, size * 0.03, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Eye highlights
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+        this.ctx.beginPath();
+        this.ctx.arc(screenX + size * 0.405, screenY + size * 0.27, size * 0.02, 0, Math.PI * 2);
+        this.ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.arc(screenX + size * 0.605, screenY + size * 0.27, size * 0.02, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Nose
+        this.ctx.fillStyle = '#1a1a1a';
+        this.ctx.beginPath();
+        this.ctx.ellipse(screenX + size * 0.5, screenY + size * 0.38, size * 0.05, size * 0.04, 0, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Nose shine
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+        this.ctx.beginPath();
+        this.ctx.arc(screenX + size * 0.48, screenY + size * 0.37, size * 0.015, 0, Math.PI * 2);
+        this.ctx.fill();
     }
 
     // Draw a tile on the map
@@ -886,32 +954,32 @@ class Renderer {
         let color;
         switch(type) {
             case 'grass':
-                color = '#7cb342';
+                color = '#5a7a3c'; // Darker green grass
                 break;
             case 'dirt':
-                color = '#8b6f47';
+                color = '#6b5638';
                 break;
             case 'tilled':
-                // Dark brown tilled soil - very noticeable
-                color = '#5D4E37';
+                // Dark brown tilled soil
+                color = '#4a3d2a';
                 break;
             case 'water':
-                color = '#2196f3';
+                color = '#1a4d7a'; // Darker blue water
                 break;
             case 'forest':
-                color = '#558b2f';
+                color = '#2d4a1f'; // Much darker forest green
                 break;
             case 'path':
-                color = '#a1887f';
+                color = '#8a7a6a'; // Earthy path
                 break;
             case 'bridge':
-                color = '#8d6e63'; // Wooden brown color for bridge
+                color = '#6d5646'; // Darker wooden bridge
                 break;
             case 'wood':
-                color = '#795548';
+                color = '#5d4638';
                 break;
             default:
-                color = '#7cb342';
+                color = '#5a7a3c';
         }
 
         this.ctx.fillStyle = color;
@@ -1064,14 +1132,68 @@ class Renderer {
         const screenY = y - this.camera.y;
         const size = CONFIG.TILE_SIZE;
 
-        // Trunk
-        this.ctx.fillStyle = '#5d4037';
+        // Trunk - darker for forest atmosphere
+        this.ctx.fillStyle = '#3d2817';
         this.ctx.fillRect(screenX + size * 0.4, screenY + size * 0.4, size * 0.2, size * 0.6);
 
-        // Leaves
-        this.ctx.fillStyle = '#2e7d32';
+        // Leaves - darker, moodier green
+        this.ctx.fillStyle = '#1a3a1a';
         this.ctx.beginPath();
         this.ctx.arc(screenX + size * 0.5, screenY + size * 0.35, size * 0.4, 0, Math.PI * 2);
+        this.ctx.fill();
+    }
+
+    drawFlower(x, y, type) {
+        const screenX = x - this.camera.x;
+        const screenY = y - this.camera.y;
+        const size = CONFIG.TILE_SIZE;
+
+        // Stem
+        this.ctx.fillStyle = '#2d5016';
+        this.ctx.fillRect(screenX + size * 0.48, screenY + size * 0.5, size * 0.04, size * 0.3);
+
+        // Flower color based on type
+        const colors = {
+            red: '#d32f2f',
+            yellow: '#fbc02d',
+            purple: '#7b1fa2',
+            white: '#f5f5f5',
+            pink: '#ec407a'
+        };
+        this.ctx.fillStyle = colors[type] || '#ec407a';
+
+        // Petals (5 petals in circle)
+        for (let i = 0; i < 5; i++) {
+            const angle = (i / 5) * Math.PI * 2;
+            const petalX = screenX + size * 0.5 + Math.cos(angle) * size * 0.08;
+            const petalY = screenY + size * 0.55 + Math.sin(angle) * size * 0.08;
+            this.ctx.beginPath();
+            this.ctx.arc(petalX, petalY, size * 0.06, 0, Math.PI * 2);
+            this.ctx.fill();
+        }
+
+        // Center
+        this.ctx.fillStyle = '#fdd835';
+        this.ctx.beginPath();
+        this.ctx.arc(screenX + size * 0.5, screenY + size * 0.55, size * 0.05, 0, Math.PI * 2);
+        this.ctx.fill();
+    }
+
+    drawRock(x, y) {
+        const screenX = x - this.camera.x;
+        const screenY = y - this.camera.y;
+        const size = CONFIG.TILE_SIZE;
+
+        // Rock - irregular shape
+        this.ctx.fillStyle = '#5d5d5d';
+        this.ctx.beginPath();
+        this.ctx.ellipse(screenX + size * 0.5, screenY + size * 0.6, size * 0.15, size * 0.1, 0, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Highlight
+        this.ctx.fillStyle = '#7d7d7d';
+        this.ctx.beginPath();
+        this.ctx.ellipse(screenX + size * 0.45, screenY + size * 0.58, size * 0.08, size * 0.05, 0, 0, Math.PI * 2);
         this.ctx.fill();
     }
 

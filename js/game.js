@@ -106,7 +106,7 @@ class Game {
 
         // Update NPCs
         this.npcs.forEach(npc => {
-            npc.update(deltaTime, this.time, this.player);
+            npc.update(deltaTime, this.time, this.player, this.world);
         });
 
         // Update dialogue
